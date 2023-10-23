@@ -90,7 +90,19 @@
 </style>
 
 <body class="main" style="margin-top: 0;">
-
+<%
+	String id = (String) session.getAttribute("id");
+	String name = (String) session.getAttribute("name");
+	String phoneNumber = (String) session.getAttribute("phoneNumber");
+	String address = (String) session.getAttribute("address");
+	String email = (String) session.getAttribute("email");
+	
+	System.out.println(id);
+	System.out.println(phoneNumber);
+	System.out.println(address);
+	System.out.println(email);
+	
+%>
   <section id="section" class="sectionbody">
 
     <div class="sectionheader">
@@ -134,15 +146,15 @@
                 <div class="form-check form-check-inline mt-3">
                   <input type="radio" name="radio1" value="oldlocation" class="form-check-input cursor-pointer"
                     id="compareinfo">
-                  <label for="gender" class="form-check-label cursor-pointer">
+                  <label for="compareinfo" class="form-check-label cursor-pointer">
                     회원 정보와 동일
                   </label>
                 </div>
 
                 <div class="form-check form-check-inline">
                   <input type="radio" name="radio1" value="newlocation" class="form-check-input cursor-pointer"
-                    id="conpareinfo">
-                  <label for="gender" class="form-check-label cursor-pointer">
+                    id="newinfo">
+                  <label for="newinfo" class="form-check-label cursor-pointer">
                     새로운 배송지
                   </label>
                 </div>
@@ -158,6 +170,7 @@
                         </th>
                         <td class="inputcontent">
                           <div class="input-group">
+                    
                             <input type="text" class="form-control " id="rname" name="rname" placeholder="이름을 입력하세요"
                               value="">
                           </div>
@@ -190,9 +203,9 @@
                   </th>
                   <td>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="010">-
-                      <input type="text" class="form-control">-
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" placeholder="010" id="rnumber1">-
+                      <input type="text" class="form-control" id="rnumber2">-
+                      <input type="text" class="form-control" id="rnumber3">
                   </td>
                 </tr>
 
@@ -238,6 +251,7 @@
                   <!-- label for에 chekbox id를 가져오면 체크박스뿐만 아니라 문자열을 클릭해도 체크됨 -->
                   기본 배송지로 저장
                 </label>
+             
               </div>
               
             </div>    
@@ -552,6 +566,34 @@
       }
     });
 
+    
+ // 라디오 버튼 요소
+    let radiobutton = document.querySelector("#compareinfo");
+
+    // 받는 사람 입력 요소
+    let nameInput = document.querySelector("#rname");
+	let numInput1 = document.querySelector("#rnumber1");
+	let numInput2 = document.querySelector("#rnumber2");
+	let numInput3 = document.querySelector("#rnumber3");
+	<%
+	String phoneNumber2 = (String) session.getAttribute("phoneNumber");
+	%>
+	
+	
+    // 라디오 버튼의 변경 이벤트 리스너 등록
+    radiobutton.addEventListener("change", function () {
+      // 라디오 버튼이 선택되었을 때
+      if (radiobutton.checked) {
+        // session.getAttribute("name")의 값을 받는 사람 입력란에 설정
+<%--         let nameFromSession = "<%= session.getAttribute("name") %>"; --%>
+        let nameFromSession = "<%= session.getAttribute("name") %>";
+        nameInput.value = nameFromSession;
+        
+        
+        
+        
+      }
+    });
   </script>
 </body>
 

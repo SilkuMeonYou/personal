@@ -58,12 +58,13 @@
           <li class="top-item"><a href="shopping_basket.jsp" class="top-link">장바구니</a></li>
           <li class="top-item"><a href="mypage_orderlist.jsp" class="top-link">주문조회</a></li>
 <%
-	String id = (String) session.getAttribute("id");
+// 	String id = (String) session.getAttribute("id");
+	String name = (String) session.getAttribute("name");
 	String phoneNumber = (String) session.getAttribute("phoneNumber");
 	String address = (String) session.getAttribute("address");
 	String email = (String) session.getAttribute("email");
 	
-	System.out.println(id);
+// 	System.out.println(id);
 	System.out.println(phoneNumber);
 	System.out.println(address);
 	System.out.println(email);
@@ -75,7 +76,7 @@
      		<li class="top-item"><a href="login" class="top-link">로그인</a></li>		
          	<% } else { %>
          		<li class="top-item"><a href="logout" class="top-link">로그아웃</a></li>
-         		<li class="top-item"><a href="#" class="top-link"><Strong><%=session.getAttribute("id") %></Strong>&nbsp; 님</a>&nbsp; 환영합니다</li>
+         		<li class="top-item"><a href="#" class="top-link"><Strong>${ id }</Strong>&nbsp; 님</a>&nbsp; 환영합니다</li>
          	<% }
           %>
         

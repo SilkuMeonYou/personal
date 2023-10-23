@@ -254,7 +254,7 @@
             <td>할인</td>
             <td rowspan="2" class="operator">=</td>
             <td>총 주문금액</td>
-            <td rowspan="2"><button class="orderButton">주문하기</button></td>
+            <td rowspan="2"><a href="payment.jsp"><button class="orderButton">주문하기</button></a></td>
           </tr>
 
           <tr>

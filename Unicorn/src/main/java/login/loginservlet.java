@@ -23,14 +23,17 @@ public class loginservlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
+		PrintWriter out = response.getWriter();
+		
 		HttpSession session = request.getSession();
 		
 		String id = "unicorn";
+		String name = "유니콘";
 		String pw = "1234";
 		String phoneNumber = "010-1234-5678";
 		String address = "충남 천안시 동남구 대흥로 134";
 		String email = "unicorn@gmail.com";
-		
+		String zipcode = "31144";
 		
 		
 		
@@ -40,14 +43,18 @@ public class loginservlet extends HttpServlet {
 			System.out.println("id, pw 일치");
 			session = request.getSession();
 			session.setAttribute("id", id);
+			session.setAttribute("name", name);
 			session.setAttribute("phoneNumber", phoneNumber);
 			session.setAttribute("address", address);
 			session.setAttribute("email", email);
-			response.sendRedirect("indexheader.jsp");
+			response.sendRedirect("index.jsp");
+			
+			System.out.println("index.jsp로 이동");
+			out.println("console.log('index.jsp로 이동');");
 		}
 
 		else {
-	          PrintWriter out = response.getWriter();
+	          
 	          out.println("<script>");
 	          out.println("alert('아이디 또는 비밀번호가 일치하지 않습니다.');"); // 수정
 	          out.println("location.href = 'login.jsp';");
