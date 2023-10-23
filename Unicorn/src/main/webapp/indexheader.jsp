@@ -53,10 +53,10 @@
     <header id="header" class="head">
       <div class="toparea">
         <ul class="topbar">
-          <li class="top-item"><a href="supportCustomer.html" class="top-link" style="margin-right: 20px;">고객지원</a></li>
-          <li class="top-item"><a href="mypage_orderlist.jsp" class="top-link">마이페이지</a></li>
-          <li class="top-item"><a href="#" class="top-link">최근본상품</a></li>
-          <li class="top-item"><a href="#" class="top-link">주문조회</a></li>
+          <li class="top-item"><a href="supportCustomer.jsp" class="top-link" style="margin-right: 20px;">고객지원</a></li>
+          <li class="top-item"><a href="mypage_main.jsp" class="top-link">마이페이지</a></li>
+          <li class="top-item"><a href="shopping_basket.jsp" class="top-link">장바구니</a></li>
+          <li class="top-item"><a href="mypage_orderlist.jsp" class="top-link">주문조회</a></li>
 <%
 	String id = (String) session.getAttribute("id");
 	String phoneNumber = (String) session.getAttribute("phoneNumber");
@@ -88,7 +88,7 @@
       <nav class="navbar navbar-expand-lg">
         <!-- expand-lg 지점에 도달하면 메뉴 사라지고 버튼 나타남 -->
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html" style="font-family:'ImcreSoojin';">
+          <a class="navbar-brand" href="index.jsp" style="font-family:'ImcreSoojin';">
             <h2> Noop Noop </h2>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -100,12 +100,12 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <!-- collapse -->
             <div class="navbar-nav ms-5 hstack gap-4">
-              <a class="nav-link active" aria-current="page" href="index.html"><h6> Home </h6></a>
-              <a class="nav-link" href="event.html"><h6> Event </h6></a>
-              <a class="nav-link" href="pd3.html"><h6> Best </h6></a>
-              <a class="nav-link" href="pd3.html#listUP"><h6> Product </h6></a>
+              <a class="nav-link active" aria-current="page" href="index.jsp"><h6> Home </h6></a>
+              <a class="nav-link" href="event.jsp"><h6> Event </h6></a>
+              <a class="nav-link" href="pdlisttest"><h6> Best </h6></a>
+              <a class="nav-link" href="pdlisttest"><h6> Product </h6></a>
               <div class="vr"></div>
-              <a class="nav-link" href="AboutUs.html"><h6> About us </h6></a>
+              <a class="nav-link" href="AboutUs.jsp"><h6> About us </h6></a>
             </div>
 
             <div class="searchbar ms-auto" style="float:right;">
@@ -121,12 +121,12 @@
       </nav>
     </header>
     <!-- header end -->
-<c:import url="http://localhost:8080/Unicorn/indexbody.jsp"/>
+    <section id="section" class="sectionbody">
+    	<div class="sectionwrap" id=sectionwrap>
 
 
-<c:import url="http://localhost:8080/Unicorn/indexfooter.jsp"/>
+
+		</div>
 </body>
-<script>
 
-</script>
 </html>

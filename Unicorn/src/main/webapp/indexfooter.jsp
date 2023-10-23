@@ -63,7 +63,7 @@
           </ul>
         </div>
         <div class="logo" style="margin-top: -70px;"> 
-          <a class="logo" href="index.html" style="font-family:'ImcreSoojin';">
+          <a class="logo" href="index.jsp" style="font-family:'ImcreSoojin';">
             <h2> Noop Noop </h2>
           </a>
         </div>

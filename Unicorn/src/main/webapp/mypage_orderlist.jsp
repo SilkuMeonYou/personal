@@ -38,206 +38,44 @@
       font-style: normal;
     }
 
-    /* =========================
-	  헤더
-    ========================= */
-    #header { background: #fff;}
-    header .toparea { height: 50px; }
-    header .topbar { vertical-align: middle; }
-    header .top-item { float: right; margin-right: 20px; margin-top: 10px; font-size: 12px; }
-    header .container-fluid { height: 100px; }
-
-     /* =========================
-	  푸터
-    ========================= */
-    footer .toparea { height: 50px; }
-    footer .topbar { vertical-align: middle; }
-    footer .top-item { float: right; margin-right: 20px; margin-top: 0px; font-size: 12px; }
-    footer .logo { padding-left: 15px; }
-
-    .footer .container { font-size: 11px; font-weight: 1000; line-height: 4;}
-    .footercontent { color:rgb(59, 59, 59); font-weight: 300; margin-right: 30px; }
-
-
-
     /* 고정 사이드메뉴 ====================*/
 
-    #container {
-      /* border: 1px solid blue; */
-      margin: 50px auto;
-
-    }
-
-    .mainbar2 {
-      /* border: 1px solid red; */
-      width: 1200px;
-      display: flex;
-      justify-content: space-between;
-      margin: auto;
-    }
-
-    .menubar {
-      width: 250px;
-    }
-
-    .recent_list {
-      width: 900px;
-    }
-
-    .menubar_title {
-      font-weight: bold;
-      margin-top: 70px;
-      margin-bottom: 10px;
-    }
-
-    .menubar_item {
-      margin-bottom: 10px;
-    }
-
-    .recent_list_title {
-      /* border: 1px solid red; */
-      border-bottom: 2px solid gray;
-      padding: 20px;
-      font-weight: bold;
-    }
-
-    .recent_list_item {
-      border-bottom: 1px solid gray;
-      height: 400px;
-    }
-
+    #container { margin: 50px auto; }
+    .mainbar2 { width: 1200px; display: flex; justify-content: space-between; margin: auto; }
+    .menubar { width: 250px; }
+    .recent_list { width: 900px; }
+    .menubar_title { font-weight: bold; margin-top: 70px; margin-bottom: 10px; }
+    .menubar_item { margin-bottom: 10px; }
+    .menubar:hover { cursor: pointer; }
     /*==================== 고정 사이드메뉴*/
 
-    .tab-content{
-      /* border: 1px solid red; */
-      margin-top: 50px;
-    }
+    .tab-content{ margin-top: 50px; }
+    
+    .recent_list_title { border-bottom: 2px solid gray; padding: 20px; font-weight: bold; }
+    .recent_list_item { border-bottom: 1px solid gray; height: 400px; }
+    
+    /* 주문내역 */
+    .menu1_wrap { margin: auto; margin-top: 20px; height: 500px; padding-top: 20px; text-align: center; Color: gray; }
 
-    /*==================== 주문내역조회, 취소반품내역*/
-    /* .nav-link {
-      color: black;
-      font-weight: bold;
-    } */
-
-    .home_item_wrap {
-      border: 1px solid rgb(190, 190, 190);
-      margin: auto;
-      margin-top: 20px;
-      width: 900px;
-      height: 180px;
-      display: flex;
-    }
-
-    .menu1_wrap {
-      /* border: 1px solid rgb(190, 190, 190); */
-      margin: auto;
-      margin-top: 20px;
-      width: 800px;
-      height: 500px;
-      padding-top: 20px;
-      text-align: center;
-      color: gray;
-    }
-
-    .home_item_img {
-      width: 300px;
-    }
-
-    .home_item {
-      /* border: 1px solid blue; */
-      width: 650px;
-      margin: 10px 10px 10px 20px;
-    }
-
-    .home_item_pay{
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .home_item_date{
-      font-size: 12px;
-    }
-    .home_item_name {
-      margin-top: 10px;
-      /* font-weight: bold; */
-    }
-
-    .home_item_review {
-      /* border: 1px solid black; */
-      text-align: right;
-      color: gray;
-    }
-
+    /*table*/
+    table{ border: 1px solid rgb(177, 177, 177); margin: 20px; }
+    .orderlist_img { width: 300px; }
+    .orderlist_delivery, .orderlist_num{ font-weight: bold; padding-left: 10px; }
+    .orderlist_date{ font-size: 12px; padding-left: 10px; }
+    .orderlist_goods, .orderlist_price{ text-align: right; padding-right: 20px; }
+    .orderlist_review { text-align: center; background-color: #d8c69c; }
+    .review_btn { border: none; background-color: #d8c69c; color: white; }
 
     /* 페이지 넘버 ====================*/
 
-    .oderbar_num{
-      /* border: 1px solid blue; */
-      display: flex;
-      justify-content: center;
-      margin-top: 50px;
-    }
-    .oderbar_num_item{
-      /* border: 1px solid gray; */
-      width: 30px;
-      height: 30px;
-      margin: 5px;
-      text-align: center;
-    }
-
+    .oderlist_num{ display: flex; justify-content: center; margin-top: 50px; }
+    .oderlist_num_item{ width: 30px; height: 30px; margin: 5px; text-align: center; }
 
   </style>
 </head>
-
+<%@ include file="indexheader.jsp" %>
 <body class="main" style="margin-top: 0;">
 
-  <div id="wrap">
-    <header id="header" class="head">
-      <div class="toparea">
-        <ul class="topbar">
-          <li class="top-item"><a href="#" class="top-link" style="margin-right: 50px;">고객지원</a></li>
-          <li class="top-item"><a href="#" class="top-link">마이페이지</a></li>
-          <li class="top-item"><a href="#" class="top-link">최근본상품</a></li>
-          <li class="top-item"><a href="#" class="top-link">주문조회</a></li>
-          <li class="top-item"><a href="#" class="top-link">로그인</a></li>
-        </ul>
-      </div>
-      <!-- top area end-->
-      <!-- nav bar -->
-      <nav class="navbar navbar-expand-lg">
-        <!-- expand-lg 지점에 도달하면 메뉴 사라지고 버튼 나타남 -->
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html" style="font-family:'ImcreSoojin';">
-            <h2> Noop Noop </h2>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <!-- 버튼 나타나고 클릭시 target으로 -->
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <!-- collapse -->
-            <div class="navbar-nav ms-5 hstack gap-4 ">
-              <a class="nav-link active" aria-current="page" href="index.html"><h6> Home </h6></a>
-              <a class="nav-link" href="event.html"><h6> Event </h6></a>
-              <a class="nav-link" href="pd3.html"><h6> Best </h6></a>
-              <a class="nav-link" href="pd3.html#listUP"><h6> Product </h6></a>
-              <div class="vr"></div>
-              <a class="nav-link" href="AboutUs.html"><h6> About us </h6></a>
-            </div>
-
-            <div class="searchbar ms-auto" style="float:right;">
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-warning" type="submit">
-                  <img src="https://ifh.cc/g/0odrBb.png">
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
     <!-- header end -->
 
     <!-- section -->
@@ -257,7 +95,7 @@
 
             <ul>
               <li class="menubar_title">활동 정보</li>
-              <li class="menubar_item"><a href="#none"></a>최근 본 상품</li>
+              <li class="menubar_item"><a href="#none"></a>나의 장바구니</li>
               <li class="menubar_item"><a href="#none"></a>나의 위시리스트</li>
               <li class="menubar_item"><a href="#none"></a>나의 게시글</li>
             </ul>
@@ -285,52 +123,120 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div class="tab-pane container active" id="home">
-                <div class="home_item_wrap">
-                  <img class="home_item_img" src="https://ifh.cc/g/Sat34K.jpg">
 
-                  <div class="home_item">
-                    <div class="home_item_pay">배송완료</div>
-                    <div class="home_item_pay">주문번호 2023-1010-1010</div>
-                    <div class="home_item_date"> 10.01 결제</div>
-                    <div class="home_item_name"> 침대</div>
-                    <div class="home_item_price"> 1000원</div>
-                    <div class="home_item_review">후기작성</div>
-                  </div>
-                  
-                </div>
+                <div class="orderlist">
+                  <table>
+                    <colgroup>
+                    <col width="300px">
+                    <col width="500px">
+                    <col width="100px">
+                  </colgroup>
+                  <tr>
+                    <td rowspan="5">
+                      <img class="orderlist_img" src="https://ifh.cc/g/Sat34K.jpg">
+                    </td>
+                    <td class="orderlist_delivery">배송완료</td>
+                    <td class="orderlist_review" rowspan="5"><input type="button" class="review_btn" value="후기작성"></td>
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_num">주문번호 2023-0920-000</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_date">10.01 결제</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_goods">침대</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_price">500,000 원</td>
+                    <!-- <td></td> -->
+                  </tr>
+                </table>
+                
+                <table>
+                  <colgroup>
+                    <col width="300px">
+                    <col width="500px">
+                    <col width="100px">
+                  </colgroup>
+                  <tr>
+                    <td rowspan="5">
+                      <img class="orderlist_img" src="https://ifh.cc/g/1YO3X4.jpg">
+                    </td>
+                    <td class="orderlist_delivery">배송완료</td>
+                    <td class="orderlist_review"rowspan="5"><input type="button" class="review_btn" value="후기작성"></td>
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_num">주문번호 2023-0920-000</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_date">10.01 결제</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_goods">침대</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_price">500,000 원</td>
+                    <!-- <td></td> -->
+                  </tr>
+                </table>
 
-                <div class="home_item_wrap">
-                  <img class="home_item_img" src="https://ifh.cc/g/1YO3X4.jpg">
-                  
-                  <div class="home_item">
-                    <div class="home_item_pay">배송완료</div>
-                    <div class="home_item_pay">주문번호 2023-1010-1010</div>
-                    <div class="home_item_date"> 10.01 결제</div>
-                    <div class="home_item_name"> 침대</div>
-                    <div class="home_item_price"> 1000원</div>
-                    <div class="home_item_review">후기작성</div>
-                  </div>
-                  
-                </div>
-                <div class="home_item_wrap">
-                  <img class="home_item_img" src="https://ifh.cc/g/1qv40K.jpg">
-                  
-                  <div class="home_item">
-                    <div class="home_item_pay">배송완료</div>
-                    <div class="home_item_pay">주문번호 2023-1010-1010</div>
-                    <div class="home_item_date"> 10.01 결제</div>
-                    <div class="home_item_name"> 침대</div>
-                    <div class="home_item_price"> 1000원</div>
-                    <div class="home_item_review">후기작성</div>
-                  </div>
-                </div>
+                <table>
+                  <colgroup>
+                    <col width="300px">
+                    <col width="500px">
+                    <col width="100px">
+                  </colgroup>
+                  <tr>
+                    <td rowspan="5">
+                      <img class="orderlist_img" src="https://ifh.cc/g/1qv40K.jpg">
+                    </td>
+                    <td class="orderlist_delivery">배송완료</td>
+                    <td class="orderlist_review" rowspan="5"><input type="button" class="review_btn" value="후기작성"></td>
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_num">주문번호 2023-0920-000</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_date">10.01 결제</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_goods">침대</td>
+                    <!-- <td></td> -->
+                  </tr>
+                  <tr>
+                    <!-- <td></td> -->
+                    <td class="orderlist_price">500,000 원</td>
+                    <!-- <td></td> -->
+                  </tr>
+                </table>
+              </div>
 
-                <div class="oderbar_num">
-                  <div class="oderbar_num_item"><<</div>
-                  <div class="oderbar_num_item"><</div>
-                  <div class="oderbar_num_item">1</div>
-                  <div class="oderbar_num_item">></div>
-                  <div class="oderbar_num_item">>></div>
+                <div class="oderlist_num">
+                  <div class="oderlist_num_item"><<</div>
+                  <div class="oderlist_num_item"><</div>
+                  <div class="oderlist_num_item">1</div>
+                  <div class="oderlist_num_item">></div>
+                  <div class="oderlist_num_item">>></div>
                 </div>
 
               </div>
@@ -351,36 +257,9 @@
     </section>
     <!-- section end -->
 
-    <hr class="hr mt-5" style="color: #d0ac88;">
-    <footer id="footer" class="footer">
-      <div class="toparea">
-        <ul class="topbar">
-          <li class="top-item"><a href="#none" class="top-link" style="margin-right: 50px;">이용안내</a></li>
-          <li class="top-item"><a href="#none" class="top-link">개인정보처리방침</a></li>
-          <li class="top-item"><a href="#none" class="top-link">이용약관</a></li>
-          <li class="top-item"><a href="#none" class="top-link">인재채용</a></li>
-          <li class="top-item"><a href="#none" class="top-link">회사소개</a></li>
-        </ul>
-      </div>
-      <div class="logo">
-        <a class="logo" href="index.html" style="font-family:'ImcreSoojin';">
-          <h2> Noop Noop </h2>
-        </a>
-      </div>
-      <div class="footer container">
-        쇼핑몰 기본정보 <br>
-        상호명 <span class="footercontent"> Noop Noop </span>
-        대표 <span class="footercontent"> Unicorn </span>
-        대표전화 <span class="footercontent"> 000-000-0000 </span>
-        사업자등록번호 <span class="footercontent"> 000-000-0000 </span><br>
-        통신판매업 신고번호 개인정보보호책임자 <span class="footercontent"> 유니콘 </span>
-        주소 <span class="footercontent"> 충남 천안시 동남구 대흥로 134</span>
-
-      </div>
-
-
-    </footer>
   </div>
 </body>
+<c:import url="indexfooter.jsp"/>
+
 
 </html>

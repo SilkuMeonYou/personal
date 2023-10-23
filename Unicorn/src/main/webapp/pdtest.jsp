@@ -184,6 +184,7 @@ a:hover, a:active, a:focus {
 
 </style>
 </head>
+<%@ include file="indexheader.jsp" %>
 <body class="main" style="margin-top: 0;">
 
 	<div id="wrap">
@@ -377,4 +378,5 @@ a:hover, a:active, a:focus {
 		
 	</script>
 </body>
+<c:import url="indexfooter.jsp"/>
 </html>

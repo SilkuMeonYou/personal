@@ -221,7 +221,7 @@ input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80
 
                 // 아니면
             } else {
-                message.style.visibility = "visible";           // 메세지 보여줌
+                message.style.display = "visible";           // 메세지 보여줌
             }
 
         });

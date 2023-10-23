@@ -4,9 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>index</title>
   <!-- bootstrap -->
@@ -18,9 +19,9 @@
   <!-- font -->
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-</head>
-<style>
-    /* div { border: 1px solid orange; } */
+
+  <style>
+/*     div { border: 1px solid orange; } */
 
     /* common */
     body { font-family: pretendard; }
@@ -36,54 +37,43 @@
       font-style: normal;
     }
 
-    .container { height: 500px; margin-top:500px; }
-    /* =========================
-	  button
-    ========================= */
-    .buttonWrap { width: 70%;  display: flex; justify-content: space-around; align-items: center; margin: auto; margin-top: 100px;}
-    .buttonWrap .btn { width: 40%; height: 200px; border-radius: 40px;}
-    .btn.btn-outline-warning { color: #d0ac88; border: 1px solid #d0ac88; }
-    .btn.btn-outline-warning:hover { background-color: #d0ac88; color: #fff; }
-    .btn.btn-outline-secondary { color:#6c757d;}
-    .btn.btn-outline-secondary:hover { color: #fff;}
     
+    .paymentComplete { margin-top: 150px;  text-align: center; height:250px;}
 
-</style>
+    .buttonWrap { display: flex; flex-direction: row; justify-content: center;}
+    .button-item { width: 49%; text-align: center; height: 70px; line-height: 3; font-size: 18px;}
+
+    #cancelButton { margin-right: 2%; border: 1px solid #d0ac88; padding: 10px; color: #d0ac88; width: 200px; }
+    #finishButton { color: white; background-color: #d0ac88; padding: 10px; width: 200px;}
+    #cancelButton:hover, #finishButton:hover { cursor: pointer; }
+    ::placeholder { font-size: 13px; }
+    
+  </style>
+</head>
 <%@ include file="indexheader.jsp" %>
 <body class="main" style="margin-top: 0;">
 
-  <div id="wrap">
-    
+  
     <!-- section -->
     <section id="section" class="sectionbody">
-      <div class="container mt-5">
-        <hr>
-        <div class="buttonWrap ">
-          <button type="button" class="btn btn-outline-secondary" id="supportbutton1"><p class="display-6"><strong>공지사항</strong></p></button></a>
-          <button type="button" class="btn btn-outline-warning" id="supportbutton2"><p class="display-6"><strong>일반 Q&A</strong></p></button>
-        </div>
+
+      <div class="paymentComplete">
+        <h2> 결제가 완료되었습니다</h2>
+        <div class="buttonWrap mt-5">
+	        <a href="index.jsp">
+	          <div class="button-item" id="cancelButton">홈으로</div>
+	        </a>
+	        <a href="mypage_orderlist.jsp">
+	          <div class="button-item" id="finishButton">주문조회 바로가기</div>
+          	</a>
+	        </div>
       </div>
-      
-      
+
+
+    </section>
+    <!-- section end -->
+
   </div>
-
-  <!-- section end -->
-
-  
-  
-<script>
-    document.querySelector("#supportbutton1").addEventListener("click", function(){
-      window.location.href = "notice.jsp"
-    });
-    document.querySelector("#supportbutton2").addEventListener("click", function(){
-      window.location.href = "QnA.jsp"
-    });
-
-
-
-  
-
-</script>
 </body>
 <c:import url="indexfooter.jsp"/>
 
