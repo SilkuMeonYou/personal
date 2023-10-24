@@ -339,8 +339,11 @@
                 <div class="content-container">
                 <div class="score"> ★★★★★ </div>
                 <div class="scorevalue"> 5 </div>
-                  <div class="id"> jjun**** </div>
-                  <div class="date"> 23.10.19 </div>
+                  <div class="id">  ${id } </div>
+                  <div class="date"> 
+                  	<c:set var="now" value="<%=new java.util.Date()%>"> </c:set>
+                  	<fmt:formatDate value="${ now }" pattern="yy.MM.dd."></fmt:formatDate>
+                  </div>
                   <div> | </div>
                   <div class="report"> 신고 </div>
 
@@ -368,80 +371,8 @@
                 </div>
               </div>
               <!-- 리뷰 1개 끝 -->
-              <!-- 리뷰 1개 클래스로 구역 설정-->
-              <div class="reviewcontainer mt-3">
-                <div class="profile"> 
-                  <img src="https://ifh.cc/g/9QpqRb.jpg" width="30px" style="opacity: 0.4;" alt="">
-                </div>
-                <div class="content-container">
-                <div class="score"> ★★★★★ </div>
-                <div class="scorevalue"> 5 </div>
-                  <div class="id"> jjun**** </div>
-                  <div class="date"> 23.10.19 </div>
-                  <div> | </div>
-                  <div class="report"> 신고 </div>
-
-                  <div class="content-container">
-                  <div class="productname"> 상품명 : </div>
-                  <div class="product me-1"> Lorem ipsum dolor sit amet consectetur </div>
-                  <div> / </div>
-                  <div class="productsize me-1"> SS </div>
-                  <div> / </div>
-                  <div class="productcolor"> white </div>
-                  <div class="reviewcontent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut inventore omnis id delectus accusamus tempora minima voluptates nihil veniam, distinctio impedit. Aut aspernatur atque, iure quos possimus mollitia facilis sint esse saepe, corporis earum dignissimos quod itaque deserunt dolorum nam aliquam praesentium aperiam harum inventore nesciunt natus quia! Fugit, ipsa. 
-                  
-                  </div>
-                </div>
-                <div class="reviewphoto">photozone</div>
-              </div>
-                  
-                <div class="photo"> 
-                  <img src="https://ifh.cc/g/vBwM0x.png" width="100px" height="100px" alt="">
-                </div>
-                <div class="recommend">
-                  <button type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="리뷰가 도움이 되셨나요?">
-                    <img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-                  </button>
-                </div>
-              </div>
-              <!-- 리뷰 1개 끝 -->
-              <!-- 리뷰 1개 클래스로 구역 설정-->
-              <div class="reviewcontainer mt-3">
-                <div class="profile"> 
-                  <img src="https://ifh.cc/g/9QpqRb.jpg" width="30px" style="opacity: 0.4;" alt="">
-                </div>
-                <div class="content-container">
-                <div class="score"> ★★★★★ </div>
-                <div class="scorevalue"> 5 </div>
-                  <div class="id"> jjun**** </div>
-                  <div class="date"> 23.10.19 </div>
-                  <div> | </div>
-                  <div class="report"> 신고 </div>
-
-                  <div class="content-container">
-                  <div class="productname"> 상품명 : </div>
-                  <div class="product me-1"> Lorem ipsum dolor sit amet consectetur </div>
-                  <div> / </div>
-                  <div class="productsize me-1"> SS </div>
-                  <div> / </div>
-                  <div class="productcolor"> white </div>
-                  <div class="reviewcontent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut inventore omnis id delectus accusamus tempora minima voluptates nihil veniam, distinctio impedit. Aut aspernatur atque, iure quos possimus mollitia facilis sint esse saepe, corporis earum dignissimos quod itaque deserunt dolorum nam aliquam praesentium aperiam harum inventore nesciunt natus quia! Fugit, ipsa. 
-                  
-                  </div>
-                </div>
-                <div class="reviewphoto">photozone</div>
-              </div>
-                  
-                <div class="photo"> 
-                  <img src="https://ifh.cc/g/vBwM0x.png" width="100px" height="100px" alt="">
-                </div>
-                <div class="recommend">
-                  <button type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="리뷰가 도움이 되셨나요?">
-                    <img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-                  </button>
-                </div>
-              </div>
-              <!-- 리뷰 1개 끝 -->
+              
+             
             </div>
           </div>
           <!-- =========================
@@ -631,15 +562,74 @@
 
   </div>
 </div>
+</body>
+  <%
+// 	String id = (String) session.getAttribute("id");
+// 	String name2 = (String) session.getAttribute("name");
+// 	String phoneNumber2 = (String) session.getAttribute("phoneNumber");
+// 	String address2 = (String) session.getAttribute("address");
+// 	String email2 = (String) session.getAttribute("email");
+// 	String zipcode = (String) session.getAttribute("zipcode"); 
+// 	String detailAddress = (String) session.getAttribute("detailAddress");
+// 	String boughtProduct = (String) session.getAttribute("boughtProduct");
+			
+// 	System.out.println(id);
+// 	System.out.println(phoneNumber2);
+// 	System.out.println(address2);
+// 	System.out.println(email2);
+// 	System.out.println(zipcode);
+// 	System.out.println(detailAddress);
+%>
   <script>
   // 리뷰 좋아요 스크립트
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
+	
+  document.addEventListener("DOMContentLoaded", function () {
+  let button = document.querySelector(".btn.btn-outline-warning");
+
+	  button.addEventListener("click", function () {
+	    button.classList.toggle("btn-warning");
+	  });
+	});
+
+document.addEventListener("DOMContentLoaded", function () {
+  let button = document.querySelector(".btn.btn-outline-warning");
+  let color = document.querySelector(".likecount");
+
+  // 클릭 여부 , 클릭 횟수
+  let isClicked = false;
+  let likeCount = 0;
+
+  // 버튼 클릭 이벤트 
+  button.addEventListener("click", function () {
+    if (isClicked) {
+      button.classList.remove("btn-warning");
+      color.style.color = "#000";
+      likeCount--;
+    } else {
+      button.classList.add("btn-warning");
+      likeCount++;
+    }
+
+    isClicked = !isClicked;
+
+    color.textContent = likeCount;
+  });
+});
+	    
+    
+        
   // 리뷰 쓰기 이동
+  	let boughtProduct = "${boughtProduct}";
     document.querySelector(".reviewbutton").addEventListener("click", function(){
-      window.location.href = "tabsreviewWrite.jsp"
-    })
+    	if( "다크초콜릿&화이트 톤 심플 베드" === boughtProduct) { //나중에 상품의 이름과 비교 
+    		window.location.href = "tabsreviewWrite.jsp" 	
+    	} else {
+    	  alert("구매하신 상품만 리뷰를 작성 할 수 있습니다.");
+    	}
+    });
   
     //위에 이미지 호버 스크립트 /
     function changeImage(targetId, newImageUrl) {
@@ -721,6 +711,6 @@
         }
      
   </script>
-</body>
+
 <c:import url="indexfooter.jsp"/>
 </html>

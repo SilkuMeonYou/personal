@@ -63,11 +63,17 @@
 	String phoneNumber = (String) session.getAttribute("phoneNumber");
 	String address = (String) session.getAttribute("address");
 	String email = (String) session.getAttribute("email");
+	String zipcode = (String) session.getAttribute("zipcode"); 
+	String detailAddress = (String) session.getAttribute("detailAddress");
+	String boughtProduct = (String) session.getAttribute("boughtProduct");
 	
 // 	System.out.println(id);
 	System.out.println(phoneNumber);
 	System.out.println(address);
 	System.out.println(email);
+	System.out.println(zipcode);
+	System.out.println(detailAddress);
+	System.out.println(boughtProduct);
 	
 %>
           <% 

@@ -82,7 +82,7 @@
   .totalReserveMoneystyle { background-color: #f8f5ec; line-height: 4; }
   .totalReserveMoney { height: 60px; font-size: 16px; font-weight: 500; display: flex; justify-content: space-between; margin-left: 25px; margin-right: 50px; }
 
-  .productinfo .productprice, .deleveryfee, .pricecount { text-align: right; }
+  .paymentinfo .productprice, .deleveryfee, .pricecount { text-align: right; }
   .productReserveMoney, .memberReserveMoney, .VoucherReserveMoney { text-align: right; }
 
   .totalpricecheck { height: 70px; text-align: center; font-size: 20px; font-weight: 500; line-height: 4; background-color: #111; color: #fff;}
@@ -90,19 +90,8 @@
 </style>
 
 <body class="main" style="margin-top: 0;">
-<%
-	String id = (String) session.getAttribute("id");
-	String name = (String) session.getAttribute("name");
-	String phoneNumber = (String) session.getAttribute("phoneNumber");
-	String address = (String) session.getAttribute("address");
-	String email = (String) session.getAttribute("email");
-	
-	System.out.println(id);
-	System.out.println(phoneNumber);
-	System.out.println(address);
-	System.out.println(email);
-	
-%>
+
+
   <section id="section" class="sectionbody">
 
     <div class="sectionheader">
@@ -185,13 +174,13 @@
                             <ul class="zipcode-group">
                               <li>
                                 <div class="input-group" style="width: 400px;">
-                                  <input type="text" id="postcode" placeholder="우편번호" class="postcode form-control">
+                                  <input type="text" id="postcode" placeholder="우편번호" class="postcode form-control" value="">
                                   <input type="button" class="btn btn-secondary" onclick="execDaumPostcode()"
-                                    value="우편번호 찾기">
+                                    value="주소 검색">
                               </li>
                           </div>
-                          <li><input type="text" id="address" placeholder="주소" class="form-control "></li>
-                          <li><input type="text" id="detailAddress" placeholder="상세주소" class="form-control"></li>
+                          <li><input type="text" id="address" placeholder="주소" class="form-control" value=""></li>
+                          <li><input type="text" id="detailAddress" placeholder="상세주소" class="form-control" value=""></li>
                           <li><input type="hidden" id="extraAddress" placeholder="참고항목" class="form-control"></li>
                           </ul>
                 </div>
@@ -203,9 +192,9 @@
                   </th>
                   <td>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="010" id="rnumber1">-
-                      <input type="text" class="form-control" id="rnumber2">-
-                      <input type="text" class="form-control" id="rnumber3">
+                      <input type="text" class="form-control" id="rnumber1" placeholder="010" name="pnum1" value="">-
+                      <input type="text" class="form-control" id="rnumber2" name="pnum2" value="">-
+                      <input type="text" class="form-control" id="rnumber3" name="pnum3" value="">
                   </td>
                 </tr>
 
@@ -214,7 +203,7 @@
                   </th>
                   <td>
                     <div class="input-group mb-3">
-                      <input type="text" name="mail1" class="mail1 form-control">
+                      <input type="text" id="mail1" name="mail1" class="mail1 form-control">
                       <span class="input-group-text" id="basic-addon1">@</span>
                       <select name="form-select" id="mail-list" class="form-select" style="border-radius: 5px;">
                         <option selected>-이메일 선택-</option>
@@ -487,11 +476,66 @@
 
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
+  // 받는 사람 입력 요소
+  let nameInput = document.querySelector("#rname");
+	let postcodeInput = document.querySelector("#postcode");
+	let numInput1 = document.querySelector("#rnumber1");
+	let numInput2 = document.querySelector("#rnumber2");
+	let numInput3 = document.querySelector("#rnumber3");
+	let addressInput = document.querySelector("#address");
+	let detailAddressInput = document.querySelector("#detailAddress");
+  let mail1Input = document.querySelector("#mail1")
+  let mail2Input = document.querySelector("#mail2")
+  
+  <%
+	String id = (String) session.getAttribute("id");
+	String name = (String) session.getAttribute("name");
+	String phoneNumber = (String) session.getAttribute("phoneNumber");
+	String address = (String) session.getAttribute("address");
+	String email = (String) session.getAttribute("email");
+	String zipcode = (String) session.getAttribute("zipcode"); 
+	String detailAddress = (String) session.getAttribute("detailAddress"); 
+			
+	System.out.println(id);
+	System.out.println(phoneNumber);
+	System.out.println(address);
+	System.out.println(email);
+	System.out.println(zipcode);
+	System.out.println(detailAddress);
+%>
+	
+	<%
+	String[] phoneNumberArr = phoneNumber.split("-");
+	String pnum1 =  phoneNumberArr[0];  
+	String pnum2 =  phoneNumberArr[1];  
+	String pnum3 =  phoneNumberArr[2];  
+	
+	String[] mailArr = email.split("@");
+	String mail1 = mailArr[0];
+	String mail2 = mailArr[1];
+	%>
     /* ========================= 
     post code script
     ========================= */
 
     function execDaumPostcode() {
+    	//
+    	let radiobutton2 = document.querySelector("#newinfo");
+        radiobutton2.checked = true;
+        
+        nameInput.value = "";
+        numInput1.value = "";
+        numInput2.value = "";
+        numInput3.value = "";
+        postcodeInput.value = "";
+        addressInput.value = "";
+        detailAddressInput.value = "";
+        
+        maillist.style.display = "block";
+        mailinput.style.display = "none";
+        mail1Input.value= "";
+        mail2Input.value= "";
+    	
       new daum.Postcode({
         oncomplete: function (data) {
           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -536,6 +580,8 @@
           document.getElementById("detailAddress").focus();
         }
       }).open();
+      
+      
     }
 
     /* ========================= 
@@ -566,34 +612,73 @@
       }
     });
 
+
     
  // 라디오 버튼 요소
     let radiobutton = document.querySelector("#compareinfo");
 
-    // 받는 사람 입력 요소
-    let nameInput = document.querySelector("#rname");
-	let numInput1 = document.querySelector("#rnumber1");
-	let numInput2 = document.querySelector("#rnumber2");
-	let numInput3 = document.querySelector("#rnumber3");
-	<%
-	String phoneNumber2 = (String) session.getAttribute("phoneNumber");
-	%>
+
 	
 	
-    // 라디오 버튼의 변경 이벤트 리스너 등록
+    // 라디오 버튼의 변경 이벤트
     radiobutton.addEventListener("change", function () {
       // 라디오 버튼이 선택되었을 때
       if (radiobutton.checked) {
-        // session.getAttribute("name")의 값을 받는 사람 입력란에 설정
+        
 <%--         let nameFromSession = "<%= session.getAttribute("name") %>"; --%>
         let nameFromSession = "<%= session.getAttribute("name") %>";
-        nameInput.value = nameFromSession;
+        let pnum1FromSession = "<%= pnum1 %>";
+        let pnum2FromSession = "<%= pnum2 %>";
+        let pnum3FromSession = "<%= pnum3 %>";
+        let postcodeFromSession = "<%= zipcode %>";
+        let addressFromSession = "<%= address %>";
+        let detailAddressFromSession = "<%= detailAddress %>";
+        let mail1FromSession = "<%= mail1 %>";
+        let mail2FromSession = "<%= mail2 %>";
         
+        nameInput.value = nameFromSession;
+        numInput1.value = pnum1FromSession;
+        numInput2.value = pnum2FromSession;
+        numInput3.value = pnum3FromSession;
+        postcodeInput.value = postcodeFromSession;
+        addressInput.value = addressFromSession;
+        detailAddressInput.value = detailAddressFromSession;
+        mail1Input.value= mail1FromSession;
+        
+        maillist.style.display = "none";
+        mailinput.style.width = "50px";
+        mailinput.style.display = "block";
+        
+        mail2Input.value= mail2FromSession;
         
         
         
       }
     });
+    
+    let radiobutton2 = document.querySelector("#newinfo");
+    
+    radiobutton2.addEventListener("change", function () {
+    	if (radiobutton2.checked) {
+    		nameInput.value = "";
+            numInput1.value = "";
+            numInput2.value = "";
+            numInput3.value = "";
+            postcodeInput.value = "";
+            addressInput.value = "";
+            detailAddressInput.value = "";
+            
+            mail1Input.value= "";
+            
+            maillist.style.display = "block";
+            mailinput.style.display = "none";
+            
+            mail2Input.value= "";
+    	}
+    });
+    	
+    
+    
   </script>
 </body>
 

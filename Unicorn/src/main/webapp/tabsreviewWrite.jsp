@@ -146,68 +146,7 @@
         <button class="bottom-button" onclick="scrollToBottom()">Bottom</button>
    </div>
     <!-- header end -->
-    <!-- section -->
-    <section id="section" class="sectionbody">
-        <!-- 상품상세 -->
-        <div class="bigbox">
-
-            <!-- 상품이미지 -->
-            <div class="box1"> 
-                <div class="imgg">
-                    <div class="big-img">
-                        <img id="bigImage" src="https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/EW8FhVnx/2/jpg/1484822727/1920x1080/fit_q87/9bfebf34e4e063bf52e3f14a86ebf5649768be28/2.jpg" alt="">
-                    </div>
-            
-                    <div class="small-img">
-                        <div class="small1 small-image" onmouseover="changeImage('bigImage', 'https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/EW8FhVnx/2/jpg/1484822727/1920x1080/fit_q87/9bfebf34e4e063bf52e3f14a86ebf5649768be28/2.jpg')">
-                            <img src="https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/EW8FhVnx/2/jpg/1484822727/1920x1080/fit_q87/9bfebf34e4e063bf52e3f14a86ebf5649768be28/2.jpg" alt="">
-                        </div>
-            
-                        <div class="small2 small-image" onmouseover="changeImage('bigImage', 'https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/dEPLHjL6/1/jpg/1484822727/1920x1080/fit_q87/14ecf7da1041964abfbd4c68905823e6e073a40b/1.jpg')">
-                            <img src="https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/dEPLHjL6/1/jpg/1484822727/1920x1080/fit_q87/14ecf7da1041964abfbd4c68905823e6e073a40b/1.jpg" alt="">
-                        </div>
-                        <div class="small3 small-image" onmouseover="changeImage('bigImage', 'https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/3up7grk7/3/jpg/1484822727/1920x1080/fit_q87/3f2a5cc1b3e8c362dc71ecbcbb65c6898a838ab9/3.jpg')">
-                            <img src="https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/3up7grk7/3/jpg/1484822727/1920x1080/fit_q87/3f2a5cc1b3e8c362dc71ecbcbb65c6898a838ab9/3.jpg" alt="">
-                        </div>
-            
-                    </div>
-                </div>
-            </div>
-
-
-        <!-- 상품옵션,가격 -->
-            <div class="box2">
-                <div class="Product-option">
-                    <div class="brand mb-3"><h3> Noop Noop </h3> </div>
-                    <div class="name mb-3"><h4> 다크초콜릿&화이트 톤 심플 베드 </h4></div>
-                    <div class="price mb-5"> 500,000원 </div>
-                    <div class="size-selection mb-5">
-                      <!-- <label for="size-select"></label> -->
-                      <select class="form-select" id="size-select" onchange="updateTotalPrice()">
-                        <option value="choice" selected="selected" disabled>사이즈를 선택하세요</option>
-                        <option value="S">S</option>
-                        <option value="SS">SS</option>
-                        <option value="Q">Q</option>
-                        <option value="K">K</option>
-                      </select>
-                    </div>
-                    
-                    <div class="quantity-selection">
-                    
-                      <label for="quantity-select"> 수량을 입력해주세요 </label>
-                      <input type="number" id="quantity-select" class="form-control mt-2" value="1" min="1" onchange="updateTotalPrice()">
-                      <h5 style="text-align:right; margin-right: 20px;"><br>총 결제금액 : <span id="total-price"> 500,000원 </span></h5><br>
-                      <button type="button" class="btn btn-outline-success"> 구매 </button>
-                      <button type="button" class="btn btn-outline-success"> 장바구니에 담기 </button>    
-                      <button type="button" class="btn btn-outline-success"> 관심상품에 추가 </button>    
-                    </div>
-                    
-        
-                  </div>
-            </div>
-
-        </div>
-
+    
 
 
 

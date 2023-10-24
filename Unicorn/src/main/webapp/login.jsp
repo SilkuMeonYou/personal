@@ -10,56 +10,170 @@
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
 <style>
-body { font-family: pretendard; }
+body {
+	font-family: pretendard;
+}
 
-/* div { border: 1px solid red; } */
-#all { justify-content: center; /* align-items: center; */ text-align: center; margin-top: 100px; /* width: 100%; */ }
+/* div {
+            border: 1px solid red;
+        } */
+#all {
+	justify-content: center;
+	/* align-items: center; */
+	text-align: center;
+	margin-top: 100px;
+	/* width: 100%; */
+}
 
-.logo { text-align: center; color: #d0ac88; margin-bottom: 100px; }
+.logo {
+	text-align: center;
+	color: #d0ac88;
+	margin-bottom: 100px;
+}
 
-.save { display: flex; justify-content: center;	margin-right: 150px; }
+.save {
+	display: flex;
+	justify-content: center;
+	margin-right: 150px;
+}
 
-.message { visibility: hidden; color: red; margin: auto; margin-left: 60px; }
+.message {
+	visibility: hidden;
+	color: red;
+	margin: auto;
+	margin-left: 60px;
+}
 
 /* 체크박스 스타일 */
-input[type="checkbox"] { /* 체크박스 기본 스타일 제거 */ appearance: none; -webkit-appearance: none;
-	-moz-appearance: none; 	/* 다양한 브라우저 지원을 위한 속성 추가 */	width: 20px; /* 체크박스 크기 조절 */
-	height: 20px; /* 체크박스 크기 조절 */ border: 2px solid #d0ac88; /* 체크박스 테두리 스타일 및 색상 */background-color: #fff; /* 체크박스 배경 색상 */ cursor: pointer; /* 포인터 모양 변경 */ }
+input[type="checkbox"] {
+	/* 체크박스 기본 스타일 제거 */
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	/* 다양한 브라우저 지원을 위한 속성 추가 */
+	width: 20px;
+	/* 체크박스 크기 조절 */
+	height: 20px;
+	/* 체크박스 크기 조절 */
+	border: 2px solid #d0ac88;
+	/* 체크박스 테두리 스타일 및 색상 */
+	background-color: #fff;
+	/* 체크박스 배경 색상 */
+	cursor: pointer;
+	/* 포인터 모양 변경 */
+}
 
-label { margin-top: 5px; }
+label {
+	margin-top: 5px;
+}
 
 /* 체크됐을 때의 스타일 */
-input[type="checkbox"]:checked { background-color: #d0ac88; /* 체크된 상태일 때의 배경 색상 */ border-color: #d0ac88;	/* 체크된 상태일 때의 테두리 색상 */ }
+input[type="checkbox"]:checked {
+	background-color: #d0ac88;
+	/* 체크된 상태일 때의 배경 색상 */
+	border-color: #d0ac88;
+	/* 체크된 상태일 때의 테두리 색상 */
+}
 
-.idpw { display: flex; justify-content: center;	/* margin-left: 40px; */ }
+.idpw {
+	display: flex;
+	justify-content: center;
+	/* margin-left: 40px; */
+}
 
-.ids { margin-right: 30px; cursor: pointer; }
+.ids {
+	margin-right: 30px;
+	cursor: pointer;
+}
 
-.l { margin-right: 20px; margin-left: 20px; }
+.l {
+	margin-right: 20px;
+	margin-left: 20px;
+}
 
-.pws { margin-left: 20px; margin-right: 20px; cursor: pointer; }
+.pws {
+	margin-left: 20px;
+	margin-right: 20px;
+	cursor: pointer;
+}
 
-.join { margin-left: 20px; }
+.join {
+	margin-left: 20px;
+}
 
-a { color: black; text-decoration-line: none; }
+a {
+	color: black;
+	text-decoration-line: none;
+}
 
-input[type="text"], input[type="password"] { height: 40px; width: 300px; /* border: 1px solid gray; */ /* border-radius: 5px; */ }
+input[type="text"], input[type="password"] {
+	height: 40px;
+	width: 300px;
+	/* border: 1px solid gray; */
+	/* border-radius: 5px; */
+}
 
-input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80px; border-radius: 5px;  border: 1px solid #d0ac88; background-color: white; }
+input[type="submit"] {
+	width: 300px;
+	height: 40px;
+	margin: 30px;
+	margin-left: 80px;
+	border-radius: 5px;
+	border: 1px solid #d0ac88;
+	background-color: white;
+}
 
-.kakao input[type="button"] { border-radius: 5px;  /* border: 1px solid #d0ac88; */	border: none; height: 30px; width: 200px; background-color: white; cursor: pointer; /* color: white; */ }
+.kakao input[type="button"] {
+	border-radius: 5px;
+	/* border: 1px solid #d0ac88; */
+	border: none;
+	height: 30px;
+	width: 200px;
+	background-color: white;
+	cursor: pointer;
+	/* color: white; */
+}
 
-.naver input[type="button"] {  border-radius: 5px; /* border: 1px solid #d0ac88; */ border: none; height: 30px; width: 200px; background-color: white; cursor: pointer; /* color: white; */ }
+.naver input[type="button"] {
+	border-radius: 5px;
+	/* border: 1px solid #d0ac88; */
+	border: none;
+	height: 30px;
+	width: 200px;
+	background-color: white;
+	cursor: pointer;
+	/* color: white; */
+}
 
-.kakao {  margin-top: 50px;	/* cursor: pointer; */ }
+.kakao {
+	margin-top: 50px;
+	/* cursor: pointer; */
+}
 
-.k1 { color: rgb(243, 243, 41); font-weight: bold; cursor: pointer; }
+.k1 {
+	color: rgb(243, 243, 41);
+	font-weight: bold;
+	cursor: pointer;
+}
 
-.n1 { color: rgb(36, 148, 33); font-weight: bold; cursor: pointer; }
+.n1 {
+	color: rgb(36, 148, 33);
+	font-weight: bold;
+	cursor: pointer;
+}
 
-.naver { margin-top: 20px; /* cursor: pointer; */ }
+.naver {
+	margin-top: 20px;
+	/* cursor: pointer; */
+}
 
-#id1, #pw1 { visibility: hidden; color: red; font-size: 13px; margin-left: 250px; margin-bottom: 10px; }
+#id1, #pw1 {
+	visibility: hidden;
+	color: red;
+	font-size: 13px;
+	margin-left: 250px;
+	margin-bottom: 10px;
+}
 </style>
 </head>
 
@@ -82,10 +196,10 @@ input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80
 				</div>
 				<div id="pw1">비밀번호를 입력해주세요</div>
 		</div>
-<!-- 		<div class="message" name="message">아이디 또는 비밀번호가 일치하지 않습니다.</div> -->
+<!-- 				<div class="message" name="message">아이디 또는 비밀번호가 일치하지 않습니다.</div> -->
 		<div class="save">
 			<div class="check_wrap">
-				<input type="checkbox">
+				<input type="checkbox" class="chk">
 			</div>
 			<label>&nbsp;아이디 저장</label>
 		</div>
@@ -181,7 +295,31 @@ input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80
             // let input1 = document.querySelector(".id-input")
             //   input1.style.border = "1px solid red"
         });
+        
+     // 아이디 저장 체크박스 이벤트
+        document.querySelector('.chk').addEventListener('focus', function () { // 아이디 저장 체크박스 선택시
+            let input1 = document.querySelector(".id-input")
+            if (idInput.value == '' ) { // 아이디 입력 필드가 빈값이면
+                idMessage.style.visibility = 'visible'; // 아이디는 필수입니다 보이게 설정
+                input1.style.border = "1px solid red"; // 아이디 입력필드 빨간색 테두리 효과
+            } else  {
+                idMessage.style.visibility = 'hidden'; // 아이디는 필수입니다 보이게 설정
+                input1.style.border = "1px solid gray"; // 아이디 입력필드 회색 테두리 효과
+            }
+        });
 
+        document.querySelector('.chk').addEventListener('focus', function () { // 아이디 저장 체크박스 선택시
+            let input2 = document.querySelector(".pw-input")
+            if (pwInput.value == '') { // 비밀번호 입력 필드가 빈값이거나 아이디 입력 필드가 빈값이면
+                pwMessage.style.visibility = 'visible'; // 비밀번호는 필수입니다 보이게 설정
+                input2.style.border = "1px solid red"; // 비밀번호 입력필드 빨간색 테두리 효과
+            } else  {
+                pwMessage.style.visibility = 'hidden'; // 아니면 안보이게 설정
+                input2.style.border = "1px solid gray"; // 아이디 입력필드 회색 테두리 효과
+            }
+        });
+
+        // 로그인버튼 이벤트
         document.querySelector('.login-input').addEventListener('focus', function () { // 로그인버튼 선택시
             let input2 = document.querySelector(".pw-input")
             if (pwInput.value == '') { // 비밀번호 입력 필드가 빈값이면
@@ -192,6 +330,13 @@ input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80
                 input2.style.border = "1px solid gray"; // 아이디 입력필드 검정색 테두리 효과
             }
         });
+        
+//          // 로그인 버튼 
+//          document.querySelector('login-input').addEventListener('click', function () {
+//              if(idInput == null || pwInput == null) {
+//                  alert("아이디 또는 비밀번호를 입력해주세요.")
+//              }
+//          });
 
         document.querySelector('.login-input').addEventListener('focus', function () { // 로그인버튼 선택시
             let input1 = document.querySelector(".id-input")
@@ -217,11 +362,11 @@ input[type="submit"] { width: 300px; height: 40px; margin: 30px; margin-left: 80
 
                 // 아이디 입력필드가 저장한값과 같거나 비밀번호 입력필드가 저장한값과 같으면 
             } else if (id.value == idvalue && pw.value == pwvalue) {
-                window.location.href = "윤여준_main_logout.html"       // 메인페이지로 이동 (로그인성공)
+                window.location.href = "index.jsp"       // 메인페이지로 이동 (로그인성공)
 
                 // 아니면
             } else {
-                message.style.display = "visible";           // 메세지 보여줌
+                message.style.visibility = "visible";           // 메세지 보여줌
             }
 
         });
