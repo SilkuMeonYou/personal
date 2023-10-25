@@ -19,7 +19,8 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
-
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head>
 <style>
 /* div { border: 1px solid orange; } */
 
@@ -185,7 +186,7 @@ footer .logo {
 	border: none;
 }
 </style>
-</head>
+
 
 
 <%@ include file="indexheader.jsp" %>
@@ -259,7 +260,7 @@ footer .logo {
 									<tr>
 										<td class="profile_table_title">주소</td>
 										<td><input class="profile_table_item" type="text"
-											name="address" value="${address}"></td>
+											name="address" id="address" value="${address}"></td>
 									</tr>
 								</table>
 
@@ -282,6 +283,7 @@ footer .logo {
 	
 </body>
 <c:import url="indexfooter.jsp"/>
+
 <script>
 let savebtn = document.querySelector(".savebtn"); //저장 버튼
 let pw = document.querySelector("#pw");
@@ -290,13 +292,35 @@ let phone = document.querySelector("#phone");
 let email = document.querySelector("#email");
 let address = document.querySelector("#address");
 
+
+function modifyInfo() {
+	if(address.value === "") {
+		alert("올바른 주소를 입력해주세요");
+	} else {
+		$.ajax({
+			type:"get",
+			url: "/modifyInfo",
+			data: { adress: address.value },
+			
+			success: function(response) {
+				alert("정보가 수정되었습니다.");
+			},
+			error: function() {
+				alert("정보 수정 중 오류가 발생했습니다.");
+			}
+		
+		});
+	}
+}
+	
 savebtn.addEventListener("click", function(){
-	let addressFromInput = address;
-	
-	
-	
-	
-	
+	modifyInfo();
 });
+// 	let addressFromInput = address;
+// 	sessionStorage.setItem("address", address.value); // 세션 등록
+// 	sessionStorage.getItem("address");
+<%-- 	<% System.out.println("sessionStorage.getItem('address')");%> --%>
+	
+
 </script>
 </html>
