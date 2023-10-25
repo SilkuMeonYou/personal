@@ -96,7 +96,7 @@
 
     <div class="sectionheader">
       <div class="headerimg">
-        <a href="product.jsp">
+        <a href="ProductDetails.jsp">
           <img src="https://ifh.cc/g/jXsrR9.jpg" alt="" class="img1">
         </a>
         <div class="right">
@@ -412,7 +412,7 @@
                 적립혜택
               </button>
             </h2>
-            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show">
+            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse">
               <div class="accordion-body">
 
                 <div class="paymentinfo">
@@ -478,12 +478,12 @@
   <script>
   // 받는 사람 입력 요소
   let nameInput = document.querySelector("#rname");
-	let postcodeInput = document.querySelector("#postcode");
-	let numInput1 = document.querySelector("#rnumber1");
-	let numInput2 = document.querySelector("#rnumber2");
-	let numInput3 = document.querySelector("#rnumber3");
-	let addressInput = document.querySelector("#address");
-	let detailAddressInput = document.querySelector("#detailAddress");
+  let postcodeInput = document.querySelector("#postcode");
+  let numInput1 = document.querySelector("#rnumber1");
+  let numInput2 = document.querySelector("#rnumber2");
+  let numInput3 = document.querySelector("#rnumber3");
+  let addressInput = document.querySelector("#address");
+  let detailAddressInput = document.querySelector("#detailAddress");
   let mail1Input = document.querySelector("#mail1")
   let mail2Input = document.querySelector("#mail2")
   
@@ -496,12 +496,12 @@
 	String zipcode = (String) session.getAttribute("zipcode"); 
 	String detailAddress = (String) session.getAttribute("detailAddress"); 
 			
-	System.out.println(id);
-	System.out.println(phoneNumber);
-	System.out.println(address);
-	System.out.println(email);
-	System.out.println(zipcode);
-	System.out.println(detailAddress);
+	System.out.println("String id : " + id);
+	System.out.println("String phoneNumber : " + phoneNumber);
+	System.out.println("String address : " + address);
+	System.out.println("String email : " + email);
+	System.out.println("String zipcode : " + zipcode);
+	System.out.println("String detailAddress : " + detailAddress);
 %>
 	
 	<%
@@ -675,6 +675,8 @@
             
             mail2Input.value= "";
     	}
+    	
+    	
     });
     	
     

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
+@WebServlet("/loginservlet")
 public class loginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class loginservlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
+		System.out.println("loginservlet check");
 		HttpSession session = request.getSession();
 		
 		String id = "unicorn";
@@ -35,7 +35,8 @@ public class loginservlet extends HttpServlet {
 		String detailAddress = "8층 Unicorn";
 //		String boughtProduct = "다크초콜릿&화이트 톤 심플 베드";
 		String boughtProduct = "다크초콜릿&화이트";
-		
+		String review = "";
+
 		String inputId = request.getParameter("id");
 		String inputPw = request.getParameter("pw");
 		
@@ -43,7 +44,6 @@ public class loginservlet extends HttpServlet {
 		if (id.equals(inputId) && pw.equals(inputPw)) {
 			// 아이디와 비밀번호가 일치하는 경우
 			session.setAttribute("id", id);
-			System.out.println("id, pw 일치");
 			session.setAttribute("name", name);
 			session.setAttribute("phoneNumber", phoneNumber);
 			session.setAttribute("address", address);
@@ -51,8 +51,9 @@ public class loginservlet extends HttpServlet {
 			session.setAttribute("zipcode", zipcode);
 			session.setAttribute("detailAddress", detailAddress);
 			session.setAttribute("boughtProduct", boughtProduct);
+			session.setAttribute("review", review);
 			
-			
+			System.out.println("id, pw 일치");
 			response.sendRedirect("index.jsp");
 		} else if (inputId == null || inputPw == null || inputId.isEmpty() || inputPw.isEmpty()) {
 			// 아이디 또는 비밀번호를 입력하지 않은 경우

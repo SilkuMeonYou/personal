@@ -183,7 +183,7 @@ input[type="submit"] {
 			<h2>Noop Noop</h2>
 		</div>
 		<div class="input">
-			<form method="get" action="login">
+			<form method="get" action="loginservlet">
 				<div class="id">
 					아이디 &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="id"
 						class="id-input" placeholder="아이디를 입력하세요">

@@ -81,7 +81,7 @@
      		%> 
      		<li class="top-item"><a href="login" class="top-link">로그인</a></li>		
          	<% } else { %>
-         		<li class="top-item"><a href="logout" class="top-link">로그아웃</a></li>
+         		<li class="top-item"><a href="logout.jsp" class="top-link">로그아웃</a></li>
          		<li class="top-item"><a href="#" class="top-link"><Strong>${ id }</Strong>&nbsp; 님</a>&nbsp; 환영합니다</li>
          	<% }
           %>
@@ -109,8 +109,8 @@
             <div class="navbar-nav ms-5 hstack gap-4">
               <a class="nav-link active" aria-current="page" href="index.jsp"><h6> Home </h6></a>
               <a class="nav-link" href="event.jsp"><h6> Event </h6></a>
-              <a class="nav-link" href="pdlisttest"><h6> Best </h6></a>
-              <a class="nav-link" href="pdlisttest"><h6> Product </h6></a>
+              <a class="nav-link" href="ProductList"><h6> Best </h6></a>
+              <a class="nav-link" href="ProductList"><h6> Product </h6></a>
               <div class="vr"></div>
               <a class="nav-link" href="AboutUs.jsp"><h6> About us </h6></a>
             </div>

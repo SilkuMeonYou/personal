@@ -171,7 +171,7 @@
         
           <ul>
           <li class="menubar_title">나의 정보</li>
-          <li class="menubar_item"><a href="#none"></a>회원정보 수정</li>
+          <li class="menubar_item"><a href="signupSave.jsp">회원정보 수정</a></li>
           <li class="menubar_item"><a href="#none"></a>로그아웃</li>
           </ul>
         

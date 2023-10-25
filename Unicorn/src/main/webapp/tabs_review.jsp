@@ -93,21 +93,21 @@
 <%@ include file="indexheader.jsp" %>
 <body class="main" style="margin-top: 0;">
   <%
-	String id = (String) session.getAttribute("id");
-	String name2 = (String) session.getAttribute("name");
-	String phoneNumber2 = (String) session.getAttribute("phoneNumber");
-	String address2 = (String) session.getAttribute("address");
-	String email2 = (String) session.getAttribute("email");
-	String zipcode = (String) session.getAttribute("zipcode"); 
-	String detailAddress = (String) session.getAttribute("detailAddress");
-	String boughtProduct = (String) session.getAttribute("boughtProduct");
+// 	String id = (String) session.getAttribute("id");
+// 	String name2 = (String) session.getAttribute("name");
+// 	String phoneNumber2 = (String) session.getAttribute("phoneNumber");
+// 	String address2 = (String) session.getAttribute("address");
+// 	String email2 = (String) session.getAttribute("email");
+// 	String zipcode = (String) session.getAttribute("zipcode"); 
+// 	String detailAddress = (String) session.getAttribute("detailAddress");
+// 	String boughtProduct = (String) session.getAttribute("boughtProduct");
 			
-	System.out.println(id);
-	System.out.println(phoneNumber2);
-	System.out.println(address2);
-	System.out.println(email2);
-	System.out.println(zipcode);
-	System.out.println(detailAddress);
+// 	System.out.println(id);
+// 	System.out.println(phoneNumber2);
+// 	System.out.println(address2);
+// 	System.out.println(email2);
+// 	System.out.println(zipcode);
+// 	System.out.println(detailAddress);
 %>
   <div id="wrap">
   

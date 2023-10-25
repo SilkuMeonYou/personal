@@ -458,7 +458,7 @@
     // 취소버튼
     document.querySelector("#cancelButton").addEventListener("click", function () {
       if (confirm("작성을 취소하시겠습니까?")) {
-        window.location.href = "1018index_hf_tabs review.html"
+        window.location.href = "tabs_review.jsp"
       }
     });
 
@@ -470,7 +470,7 @@
           alert("리뷰하실 내용을 입력해주세요");
         } else {
           if (confirm("등록하시겠습니까?")) {
-            window.location.href = "1018index_hf_tabs review.html"
+            window.location.href = "tabs_review.jsp"
           }
         }
       });
