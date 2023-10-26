@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%@ page import="index.beforePayDTO" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.NumberFormat"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +24,7 @@
   <!-- font -->
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
 <style>
   /* div { border: 1px solid orange; } */
@@ -195,6 +201,7 @@
                       <input type="text" class="form-control" id="rnumber1" placeholder="010" name="pnum1" value="">-
                       <input type="text" class="form-control" id="rnumber2" name="pnum2" value="">-
                       <input type="text" class="form-control" id="rnumber3" name="pnum3" value="">
+                      </div>
                   </td>
                 </tr>
 
@@ -216,6 +223,7 @@
                         <option value="etc">직접입력</option>
                         <input type="text" name="mail2" id="mail2" class="form-control" placeholder="직접입력">
                       </select>
+                      </div>
                   </td>
                 </tr>
                 </tbody>
@@ -247,7 +255,22 @@
           </div>
         </div>
         <hr>
-
+        
+       	<%
+       	NumberFormat numberFormat = NumberFormat.getNumberInstance(java.util.Locale.US);
+       	List<beforePayDTO> list = (List<beforePayDTO>) session.getAttribute("list3");
+		if(list == null) {
+			System.out.println("NUll");
+		} else {
+			System.out.println("NUll아님");
+			
+			
+			
+			
+			
+		}
+		%>
+		
 
         <!-- ========================= 
               accordion event second
@@ -273,24 +296,26 @@
                     <tr class="orderedProduct">
                       <th scope="row" rowspan="3">
                       	<a href="product.jsp">
-                        <img src="https://p.turbosquid.com/ts-thumb/Gy/YjE1S2/3up7grk7/3/jpg/1484822727/1920x1080/fit_q87/3f2a5cc1b3e8c362dc71ecbcbb65c6898a838ab9/3.jpg" width="180px" height="150px" alt="" class="orderedImg">
+                      		
+                        <img src="<%=list.get(0).getImageUrl() %>" width="180px" height="150px" alt="" class="orderedImg">
+                    	
                         </a>
                       </th>
                       <td class="inputcontent">
                         <div class="productname">
-                          다크초콜릿&화이트 톤 심플 베드
+                          <%=list.get(0).getProductName() %>
                         </div>
                       </td>
                     </tr>
                     <td class="inputcontent">
                       <div class="productquantity">
-                        수량 <span class="quantity-item">1개</span>
+                        수량 <span class="quantity-item"><%=numberFormat.format(list.get(0).getAmount() )%></span>개
                       </div>
                     </td>
                     <tr style="border: none;">
                       <td class="inputcontent">
                         <div class="productprice">
-                          <span class="quantity-item">500,000</span>원
+                          <span class="productprice-item"><%=numberFormat.format(list.get(0).getProductPrice()) %></span>원
                         </div>
                       </td>
                     </tr>
@@ -303,7 +328,7 @@
               <div class="deleveryPrice">
                 <div class="title"> 배송비 </div>
                 <div class="deleveryFee-item">
-                  <span class="delveryFee"><strong> 20,000 </span> 원</strong>
+                  <span class="delveryFee"><strong> <%=numberFormat.format(list.get(0).getDeleveryFee())%> </span> 원</strong>
                 </div>
               </div>
             </div>
@@ -330,11 +355,11 @@
                     <tbody>
                       <tr>
                         <td class="productname"> 주문상품 </td>
-                        <td class="productprice" style="padding-right: 30px;"> 500,000원 </td>
+                        <td class="productprice" style="padding-right: 30px;"><%=numberFormat.format( list.get(0).getProductPrice()) %>원 </td>
                       </tr>
                       <tr>
                         <td class="deleverytitle"> 배송비 </td>
-                        <td class="deleveryfee" style="padding-right: 30px;"> 20,000원 </td>
+                        <td class="deleveryfee" style="padding-right: 30px;"><%=numberFormat.format(list.get(0).getDeleveryFee())%>원 </td>
                       </tr>
                       <tr>
                         <td class="pricecounttitle"> 할인/부가결제 </td>
@@ -349,7 +374,7 @@
                 <div class="totalPrice">
                   <div class="title"> 최종결제금액</div>
                   <div class="totalFee-item">
-                    <span class="totalFee"><strong> 520,000 </span> 원</strong>
+                    <span class="totalFee"><strong><%=numberFormat.format(list.get(0).getProductPrice() + list.get(0).getDeleveryFee())%> </span> 원</strong>
                   </div>
                 </div>
               </div>
@@ -678,6 +703,51 @@
     	
     	
     });
+    
+    
+    let savelocation = document.querySelector("#savelocation");
+    
+    savelocation.addEventListener("change", function(event) {
+    	if(event.target.checked) {
+    		let nameInput = document.querySelector("#rname");
+   			let postcodeInput = document.querySelector("#postcode");
+    		let numInput1 = document.querySelector("#rnumber1");
+    		let numInput2 = document.querySelector("#rnumber2");
+    		let numInput3 = document.querySelector("#rnumber3");
+    		let addressInput = document.querySelector("#address");
+    		let detailAddressInput = document.querySelector("#detailAddress");
+    		let mail1Input = document.querySelector("#mail1");
+   			let mail2Input = document.querySelector("#mail2");
+//    			let messageInput = documnet.querySelector("#message-list");
+		    if(nameInput.value === "" || postcodeInput.value === "" || numInput1.value === "" || numInput2.value === "" || numInput3.value === "" || mail1Input.value === "" || mail2Input.value === "") {
+    		alert("올바른 정보를 입력해주세요");
+    		event.target.checked= false;
+		    } else {
+	   			modifyInfo();
+	    	} 
+    	}
+    	
+    });
+    
+    
+    function modifyInfo() {
+    		$.ajax({
+    			type:"get",
+    			url: "/Unicorn/newDeleveryLocation",
+    			data: { name: nameInput.value, phoneNumber:numInput1+numInput2+numInput3, postcodce:postcodeInput, address: addressInput.value, detailaddress: detailAddressInput.value, email: mail1Input.value +"@"+ mail2Input.value, message: messageinput.value },    			
+    			success: function(response) {
+    				alert("정보가 수정되었습니다.");
+    				
+    			},
+    			error: function() {
+    				alert("정보 수정 중 오류가 발생했습니다.");
+    			}
+    		
+    		});
+    	
+    };
+
+
     	
     
     

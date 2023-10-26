@@ -408,19 +408,26 @@ td {
 					<div class="brand mb-3">
 						<h3>Noop Noop</h3>
 					</div>
+					<form action = "shopping_basketServlet">
 					<div class="name mb-3">${info.productName}</div>
+					<input type = "hidden" name = "productName" value = "${info.productName}">
 					<div class="price mb-2">${info.productPrice}</div>
+					<input type = "hidden" name = "productPrice" value = "${info.productPrice}">
+					<input type="hidden" name="productNum" value="${info.productNum}">
 					<div class="salePrice mb-5" style="font-size: 15px">할인 금액
 						${info.salePrice}원</div>
+						<input type = "hidden" name = "salePrice" value = "${info.salePrice}">
 					<div class="size-selection mb-5">
 						<!-- <label for="size-select"></label> -->
-						<select class="form-select" id="size-select"
+						<select class="form-select" id="size-select" name = "productSize"
 							onchange="updateTotalPrice()">
 							<option value="S" selected>S</option>
 							<option value="SS">SS</option>
 							<option value="Q">Q</option>
 							<option value="K">K</option>
 						</select>
+<!-- 						<input type = "submit" value = "장바구니"> -->
+						
 
 					</div>
 
@@ -428,7 +435,7 @@ td {
 
 						<label for="quantity-select"> 수량을 입력해주세요 </label> <input
 							type="number" id="quantity-select" class="form-control mt-2"
-							value="1" min="1" onchange="updateTotalPrice()">
+							value="1" min="1" onchange="updateTotalPrice()" name="amount">
 
 						<h5 style="text-align: right; margin-right: 20px;">
 							<br>총 결제금액 : <span id="total-price">
@@ -437,15 +444,13 @@ td {
 
 						</h5>
 						<br>
-						<button type="button" class="btn btn-outline-success">장바구니에
+						<button type="submit" class="btn btn-outline-success" value=1 name="type">장바구니에
 							담기</button>
 						<button type="button" class="btn btn-outline-success">
 							관심상품에 담기</button>
-							<a href="payment.jsp">
 						<button type="button" class="btn btn-outline-success">구매</button>
-						</a>
 					</div>
-
+					
 
 				</div>
 			</div>
@@ -514,7 +519,8 @@ td {
 							<td>${info.productcompany}</td>
 							<td>모델명</td>
 							<td>${info.productnumber}</td>
-
+				<input type = "hidden" name = "productnumber" value = "${info.productnumber}">
+						</form>		
 						</tr>
 						<tr>
 							<td>원산지</td>
@@ -938,13 +944,9 @@ td {
    var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
    // 리뷰 쓰기 이동
-  document.querySelector(".reviewbutton").addEventListener("click", function(){
-    	if(boughtProduct "다크초콜릿&화이트 톤 심플 베드") {
-    		alert("구매하신 상품만 리뷰를 작성 할 수 있습니다.");
-    	} else {
-      window.location.href = "tabsreviewWrite.jsp"
-    	}
-    });
+   document.querySelector(".reviewbutton").addEventListener("click", function () {
+      window.location.href = "index_hf_tabs reviewwrite.html";
+   });
 
    //위에 이미지 호버 스크립트 /
    function changeImage(targetId, newImageUrl) {
@@ -1041,6 +1043,5 @@ td {
    }
 </script>
 </body>
-<c:import url="http://localhost:8080/Unicorn/indexfooter.jsp"/>
-
+<c:import url="indexfooter.jsp"/>
 </html>

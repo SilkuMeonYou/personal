@@ -23,11 +23,12 @@ public class modifyInfo extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String address = request.getParameter("address");
+		System.out.println(address);
 		if(address != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("address", address);
 			
-			response.getWriter().write("정보가 수정되었습니다");
+			
 		}
 		
 	}

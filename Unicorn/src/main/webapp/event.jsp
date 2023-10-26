@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="event.EventDTO"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +55,6 @@
     .eventContainer {
       max-width: 2000px;
       display: flex;
-
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -95,62 +99,43 @@
 
   </style>
 </head>
-<%@ include file="indexheader.jsp" %>
 <body>
+<%@ include file="indexheader.jsp" %>
 <section id="section" class="sectionbody">
       <div class="sectionContainer">
+      
         <div class="titleArea">
           <h1>Event</h1>
         </div>
+<div class="eventContainer">
+<%  List<EventDTO> list =  (List<EventDTO>) session.getAttribute("eventList");
+	int count = 0;
+	for(EventDTO e : list){ %>
+		
+		
 
-        <div class="eventContainer">
-
-          <div class="event-item" id="event_1">
-            <img src="https://t4.ftcdn.net/jpg/04/00/15/03/240_F_400150323_k2FWi3Mk1D8tJ9xEGnl9x27WO61eLPbv.jpg"
-              class="event-img">
+          <div class="event-item" id="event_1" >
+          <a href="event_view.jsp?eventIndex=<%= count %>">
+            <img src="<%= e.getEventImgUrl() %>"class="event-img">
+            </a>
             <div class="event-title">
-              리뷰쓰고 선물받GO!
+              <%= e.getEventTilte() %>
             </div>
+         
           </div>
-          <div class="event-item" id="event_2">
-            <img src="https://t3.ftcdn.net/jpg/06/34/07/84/240_F_634078401_DD0xqDmzJcgSobr8T5tIfFk5uxEMmIEQ.jpg"
-              class="event-img">
-            <div class="event-title">
-              HELLO AUTUMN 가을 이벤트
-            </div>
-          </div>
+        
+	
+<% 	count++;}
 
-          <div class="event-item" id="event_3">
-            <img src="https://t3.ftcdn.net/jpg/06/17/34/00/240_F_617340029_VAdAxm3Jf0RuMm7igvAH7RYyhmnTArlF.jpg"
-              class="event-img">
-            <div class="event-title">
-              신혼부부 이벤트
-            </div>
-          </div>
-
-          <div class="event-item" id="event_4">
-            <img src="https://t4.ftcdn.net/jpg/06/36/13/99/240_F_636139988_fxwEOLwa44QWFo8gPUC6WLb3xqOhBulA.jpg"
-              class="event-img">
-            <div class="event-title">
-              눕눕 회원을 위한 구매 혜택
-            </div>
-          </div>
-
+%>
+        
+        
         </div>
       </div>
 
     </section>
- <script>
-    let event_item = document.querySelectorAll(".event-item");
+     <jsp:include page="indexfooter.jsp" flush="true"/>
 
-    for (let i = 1; i <= event_item.length; i++) {
-
-      document.querySelector("#event_" + i).addEventListener("click", function () {
-        window.location.href = "event_view" + i + ".jsp"
-      });
-    }
-
-  </script>
+   
 </body>
-<c:import url="indexfooter.jsp"/>
 </html>

@@ -290,6 +290,7 @@ let pw = document.querySelector("#pw");
 let pw2 = document.querySelector("#pw2");
 let phone = document.querySelector("#phone");
 let email = document.querySelector("#email");
+
 let address = document.querySelector("#address");
 
 
@@ -299,11 +300,12 @@ function modifyInfo() {
 	} else {
 		$.ajax({
 			type:"get",
-			url: "/modifyInfo",
-			data: { adress: address.value },
+			url: "/Unicorn/modifyInfo",
+			data: { address: address.value },
 			
 			success: function(response) {
 				alert("정보가 수정되었습니다.");
+				
 			},
 			error: function() {
 				alert("정보 수정 중 오류가 발생했습니다.");
@@ -312,14 +314,11 @@ function modifyInfo() {
 		});
 	}
 }
-	
+
 savebtn.addEventListener("click", function(){
 	modifyInfo();
 });
-// 	let addressFromInput = address;
-// 	sessionStorage.setItem("address", address.value); // 세션 등록
-// 	sessionStorage.getItem("address");
-<%-- 	<% System.out.println("sessionStorage.getItem('address')");%> --%>
+
 	
 
 </script>
