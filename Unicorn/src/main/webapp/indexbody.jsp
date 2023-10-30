@@ -144,7 +144,7 @@
                 <div class="bestcontainer d-flex flex-wrap flex-row ">
 
                     <div class="img-wrap mt-3 d-inline-block">
-                      <a href="product.jsp">
+                      <a href="ProductDetails.jsp">
                         <img class="bestimg m-auto" src="https://ifh.cc/g/WTJ8NH.jpg" width="100%" alt="">
                         <div class="imgtitle"> Blue&Wood tone bed
                         </div>
@@ -154,7 +154,7 @@
                     </div>
 
                     <div class="img-wrap mt-3 d-inline-block">
-                      <a href="#none">
+                      <a href="ProductDetails.jsp">
                         <img class="bestimg m-auto" src="https://ifh.cc/g/oXBBxt.jpg" width="100%" alt="">
                         <div class="imgtitle"> White&Cornflowerblue tone bed
                         </div>
@@ -164,7 +164,7 @@
                     </div>
 
                     <div class="img-wrap mt-3 d-inline-block">
-                      <a href="#none">
+                      <a href="ProductDetails.jsp">
                         <img class="bestimg m-auto" src="https://ifh.cc/g/kjkXlN.jpg" width="100%"  height="230px" alt="">
                         <div class="imgtitle"> Mark-champs bed
                         </div>
@@ -174,7 +174,7 @@
                     </div>
 
                     <div class="img-wrap mt-3 d-inline-block">
-                      <a href="#none">
+                      <a href="ProductDetails.jsp">
                         <img class="bestimg m-auto" src="https://ifh.cc/g/J90Fbn.jpg" width="100%"  height="230px" alt="">
                         <div class="imgtitle"> Fred-Grey bed
                         </div>
@@ -184,7 +184,7 @@
                     </div>
                   </div>
                   <div class="button d-flex justify-content-center">
-                     <a href="pdlisttest">
+                     <a href="ProductBestList.jsp">
                     <button type="button" class="btn btn-outline-secondary">더보기</button></a>
                   </div>
                    
@@ -203,7 +203,7 @@
       <div class="new-detail" id="new-detail1">
         모던함을 더한 세미클래식 스타일
        </div>
-       <a class="new-readmore" id="new-readmore1" href="product.jsp">더보기</a>
+       <a class="new-readmore" id="new-readmore1" href="productDetail?productNum=3">더보기</a>
         
        </div>
     </div>
@@ -216,7 +216,7 @@
       <div class="new-detail" id="new-detail2">
        최고 퀄리티의 천연 가죽인 톱 그레인 적용
        </div>
-       <a class="new-readmore" id="new-readmore2" href="product.jsp">더보기</a>
+       <a class="new-readmore" id="new-readmore2" href="productDetail?productNum=8">더보기</a>
        </div>
       </div>
     </section>

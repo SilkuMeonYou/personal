@@ -80,6 +80,7 @@
     #container { margin: auto; }
     .mypage { padding: 50px; font-size: 30px; font-weight: bold; text-align: center; color: white; background-color: #d8c69c; }
     .mypage2 { font-size: 20px; text-align: center; margin-top: 20px; }
+	.none_id { text-align: center; color : gray; font-size : 15px; padding : 20px; }    
 
     /* 총 주문, 적립금, 쿠폰====================*/
     .mainbar { display: flex; justify-content: space-around; width: 1000px; margin: 70px auto; text-align: center; }
@@ -121,6 +122,12 @@
       <div id="container"> 
 
        <div class="mypage">마이페이지</div>
+       
+       <%
+       if(session.getAttribute("id") == null){%>
+       		<div class="none_id">로그인 후 이용가능합니다</div>  
+       <%}else{	%>
+
        <div class="mypage2">안녕하세요, 이인혜님!</div>
 
        <div class="mainbar_wrap">
@@ -155,25 +162,25 @@
 
         <div class="mainbar2">
         <div class="menubar">
-          <ul>
-          <li class="menubar_title">나의 쇼핑정보</li>
-          <li class="menubar_item"><a href="#none"></a>주문내역 조회</li>
-          <li class="menubar_item"><a href="#none"></a>적립금 내역</li>
-          <li class="menubar_item"><a href="#none"></a>쿠폰 내역</li>
-          </ul>
-        
-          <ul>
-          <li class="menubar_title">활동 정보</li>
-          <li class="menubar_item"><a href="#none"></a>나의 장바구니</li>
-          <li class="menubar_item"><a href="#none"></a>나의 위시리스트</li>
-          <li class="menubar_item"><a href="#none"></a>나의 게시글</li>
-          </ul>
-        
-          <ul>
-          <li class="menubar_title">나의 정보</li>
-          <li class="menubar_item"><a href="signupSave.jsp">회원정보 수정</a></li>
-          <li class="menubar_item"><a href="#none"></a>로그아웃</li>
-          </ul>
+		  <ul>
+			<li class="menubar_title">나의 쇼핑정보</li>
+			<li class="menubar_item"><a href="mypage_orderlist.jsp">주문내역 조회</a></li>
+			<li class="menubar_item"><a href="mypage_point.jsp">적립금 내역</a></li>
+			<li class="menubar_item"><a href="coupon">쿠폰 내역</a></li>
+		  </ul>
+	
+		  <ul>
+			<li class="menubar_title">활동 정보</li>
+			<li class="menubar_item"><a href="shopping_basket.jsp">나의 장바구니</a></li>
+			<li class="menubar_item"><a href="wishlistServlet">나의 위시리스트</a></li>
+			<li class="menubar_item"><a href="board">나의 게시글</a></li>
+		  </ul>
+	
+		  <ul>
+			<li class="menubar_title">나의 정보</li>
+			<li class="menubar_item"><a href="signupSave">회원정보 수정</a></li>
+			<li class="menubar_item"><a href="logout.jsp">로그아웃</a></li>
+		  </ul>
         
       </div>
       
@@ -230,13 +237,22 @@
       </div>
         
     </div>
-
-          
+    
+          <%}%>
     </section>
     <!-- section end -->
 
     
   </div>
+  <script>
+  
+  // 자세히보기 버튼 클릭 시 주문내역조회로 이동
+  let detail_btn = document.querySelector(".detail_btn");
+  
+  detail_btn.addEventListener("click",function() {
+		window.location.href = "mypage_orderlist.jsp";
+	});
+  </script>
 </body>
 <c:import url="indexfooter.jsp"/>
 

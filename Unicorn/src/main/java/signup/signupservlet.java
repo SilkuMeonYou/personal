@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 public class signupservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// 입력 값을 저장할 ArrayList 생성
+	List<SignUpDTO> list = new ArrayList<>();
+
 	public signupservlet() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -26,17 +29,15 @@ public class signupservlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
+		SignUpDTO signup = new SignUpDTO();
+		
+		
 		String inputName = request.getParameter("name");
 		String inputId = request.getParameter("id");
 		String inputPw = request.getParameter("pw");
 		String inputMail = request.getParameter("email");
 		String inputNum = request.getParameter("phone");
 		String inputAd = request.getParameter("address");
-		
-		// 입력 값을 저장할 ArrayList 생성
-		List<SignUp> list = new ArrayList<>();
-
-		SignUp signup = new SignUp();
 
 		signup.setName(inputName);
 		signup.setId(inputId);
@@ -48,26 +49,25 @@ public class signupservlet extends HttpServlet {
 		list.add(signup);
 
 		System.out.println("list" + list);
+		
 		// 세션을 가져옴
 		HttpSession session = request.getSession();
 		session.setAttribute("signup", signup);
-		
+//		session.setAttribute("signup", list);
+
 		// 모든 입력필드가 빈값이 아니면
-		if (inputName != null && !inputName.isEmpty() 
-				&& inputId != null && !inputId.isEmpty() 
-				&& inputPw != null && !inputPw.isEmpty() 
-				&& inputMail != null && !inputMail.isEmpty() 
-				&& inputNum != null && !inputNum.isEmpty() 
-				&& inputAd != null && !inputAd.isEmpty()) {
+		if (inputName != null && !inputName.isEmpty() && inputId != null && !inputId.isEmpty() && inputPw != null
+				&& !inputPw.isEmpty() && inputMail != null && !inputMail.isEmpty() && inputNum != null
+				&& !inputNum.isEmpty() && inputAd != null && !inputAd.isEmpty()) {
 			// 로그인 페이지로 이동
 			System.out.println("회원가입 완료");
-			response.sendRedirect("loginStart");
+			response.sendRedirect("login");
 		} else {
 			System.out.println("회원가입 실패");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('모든정보를 입력해주세요.');");
-			out.println("location.href = 'signupStart';");
+			out.println("history.back();");
 			out.println("</script>");
 		}
 

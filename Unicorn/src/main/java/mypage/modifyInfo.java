@@ -23,13 +23,21 @@ public class modifyInfo extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String address = request.getParameter("address");
+		String email = request.getParameter("email");
+		String phoneNumber = request.getParameter("phoneNumber");
+
 		System.out.println(address);
-		if(address != null) {
+		System.out.println(email);
+		System.out.println(phoneNumber);
+	
+		if(address != null && email != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("address", address);
-			
-			
+			session.setAttribute("email", email);
+			session.setAttribute("phoneNumber", phoneNumber);
+
 		}
+	
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

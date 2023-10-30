@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page import="productList.ProductInfo"%>
+<%@ page import="productList.ProductInfoDTO"%>
 <%@ page import="shopping_basket.CartDTO"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.text.NumberFormat" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
 <!-- font -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <style>
 /* div { border: 1px solid orange; } */
@@ -235,11 +236,12 @@ td {
 			%> 로그인 후 이용가능한 페이지입니다. <%
 			} else {
 					
-				
+				 NumberFormat numberFormat = NumberFormat.getNumberInstance(java.util.Locale.US);
 				
 				List<CartDTO> cartList = (List<CartDTO>) session.getAttribute("cartList");
-				List<ProductInfo> list = (List<ProductInfo>) session.getAttribute("list");
+				List<ProductInfoDTO> list = (List<ProductInfoDTO>) session.getAttribute("list");
 				int count = 1;
+				
 				if ( list == null || cartList == null || cartList.isEmpty() ) {
 					%>
 					장바구니에 담은 상품이 없습니다.
@@ -250,65 +252,69 @@ td {
 			} else {
 				
 				for (CartDTO cart : cartList) {
-					ProductInfo info = list.get(cart.getNum()-1);
+					ProductInfoDTO info = list.get(cart.getNum()-1);
+					int dcPrice = info.getSalePrice();
+					
+					
 		%>
 
 		<div class="infoContainer" id="infoContainer<%=count%>">
-		<form action="/Unicorn/cart_removeServlet">
+		<form action="cart_removeServlet">
 		<input type="hidden" name="cartProductIndex" value="<%=count-1%>">
+		
+		
 			<table width="100%" class="orderTable">
 				<col width="5%">
 				<col width="20%">
-				<col width="10%">
 				<col width="15%">
-				<col width="10%">
 				<col width="15%">
-				<col width="10%">
+				<col width="15%">
+				<col width="15%">
 				<col width="15%">
 				<tr>
 					<td class="orderHead"></td>
-					<td colspan="6" class="orderHead" id="order_title"><%=info.getProductName()%></td>
+					<td colspan="5" class="orderHead" id="order_title"><%=info.getProductName()%></td>
 					
 					
-					<td><input type="submit" name="delete" value="삭제" class="removeButton" id="removeBtn<%=count%>"> </td>
+					<td><input type="submit" name="button" value="삭제" class="removeButton" id="removeBtn<%=count%>"> </td>
 						
 				</tr>
 
 				<tr>
-					<td rowspan="2"><label class="custom-checkbox"
-						for="chkbox<%=count%>"> <input type="checkbox"
-							id="chkbox<%=count%>"> <span class="checkmark"></span>
+					<td rowspan="2"><label class="custom-checkbox" for="chkbox<%=count%>"> 
+					<input type="hidden" name="size" value="<%=cart.getSize()%>">
+						<input type="checkbox" id="chkbox<%=count%>" name="checkedProduct" value="<%=cart.getNum()-1%>"> 
+						<span class="checkmark"></span>
 					</label></td>
-					<td rowspan="2"><img src="<%=info.getImageUrl()%>"
-						class="goodsimg"></td>
+					<td rowspan="2"><a href="productDetail?productNum=<%=cart.getNum()%>"><img src="<%=info.getImageUrl()%>" class="goodsimg"></a></td>
 					<td>사이즈</td>
 					<td>수량</td>
 					<td>상품금액</td>
-					<td>배송비</td>
+					
 					<td>할인금액</td>
 					<td>결제예상</td>
 
 				</tr>
 
 				<tr>
+				
 					<td class="orderDetails"><%=cart.getSize()%></td>
 					<td class="orderDetails" id="order_amount">
 						<button type="button" class="amountNum" id="minus<%=count%>">-</button> <span
 						id="orderAmount<%=count%>"><%=cart.getAmount()%></span>
-						<button type="button" class="amountNum" id="plus<%=count%>">+</button> <%
-					session.setAttribute("deliveryPrice", "5,000");
-					session.setAttribute("dcPrice", "10,000");
-			%>
+						<button type="button" class="amountNum" id="plus<%=count%>">+</button> 
+					
+			
 					</td>
 					<td class="orderDetails" id="order_fee<%=count%>"><%=info.getProductPrice()%></td>
-					<td class="orderDetails" id="order_deliveryFee<%=count%>"><%=session.getAttribute("deliveryPrice")%></td>
-					<td class="orderDetails" id="order_discountFee<%=count%>"><%=session.getAttribute("dcPrice")%></td>
+					
+					<td class="orderDetails" id="order_discountFee<%=count%>"><%=numberFormat.format(dcPrice)%>원</td>
 					<td class="orderDetails" id="order_ex-amount<%=count%>"></td>
 
 				</tr>
 
 			</table>
-			</form>
+		
 		</div>
 		<%
 		count++;
@@ -334,8 +340,8 @@ td {
 					<col width="10%">
 					<col width="10%">
 					<col width="10%">
-					<col width="10%">
-					<col width="10%">
+					<col width="15%">
+					<col width="5%">
 					<col width="20%">
 					<col width="15%">
 				</colgroup>
@@ -347,10 +353,8 @@ td {
 					<td>할인</td>
 					<td rowspan="2" class="operator">=</td>
 					<td>총 주문금액</td>
-					<td rowspan="2">
-					<a href="payment.jsp">
-					<button class="orderButton" type="button">주문하기</button></td>
-					</a>
+					<td rowspan="2"><button type="submit" class="orderButton" id="orderBtn" name="button" value="주문">주문하기</button></td>
+					
 				</tr>
 
 				<tr>
@@ -358,14 +362,21 @@ td {
 					<td class="totalCost" id="total_deliveryFee">0 원</td>
 					<td class="totalCost" id="total_discountFee">0 원</td>
 					<td class="totalCost" id="total_fee">0 원</td>
+					
+					
 				</tr>
 			</table>
 
-			<!-- ============= 주문리스트 ================-->
+					<input type="hidden" name="checkedProductPrice" value="0">
+					<input type="hidden" name="deliveryPrice" value="0">
+					<input type="hidden" name="totalDcPrice" value="0">
+					<input type="hidden" name="total" value="0">
+					
 
 
 		</div>
-
+</form>
+	<!-- ============= 토탈박스 끝 ================-->
 	</section>
 
 	<!-- section end -->
@@ -375,6 +386,12 @@ td {
 
 	<script>
 	
+	let checkedProductPrice = 0;
+  	let deliveryPrice = 0; 
+  	let totalAll = 0;
+  	let totalDiscountPrice = 0;
+  
+  	
 	let infoContainers = document.querySelectorAll(".infoContainer");
 
 	infoContainers.forEach((currentContainer, index) => {
@@ -382,6 +399,7 @@ td {
 	let unitPrice = 0;
   
 
+	
  
       // 수량 변경하기 관련
       let plus = document.getElementById("plus" + i);
@@ -398,18 +416,20 @@ td {
       plus.addEventListener("click", function () {
         amount += 1;
         orderAmount.innerHTML = amount;
-        doOrderPrice()
-        doOrderTotal()
-        doTotal()
-     
+        doOrderPrice();
+        doDcPrice();
+        doOrderTotal();
+        doTotal();
+       
       });
       minus.addEventListener("click", function () {
         if (amount > 1) {
           amount -= 1;
           orderAmount.innerHTML = amount;
-          doOrderPrice()
-          doOrderTotal()
-          doTotal()
+          doOrderPrice();
+          doDcPrice();
+          doOrderTotal();
+          doTotal();
           
         }
       });
@@ -423,17 +443,22 @@ td {
         order_fee.innerHTML = (unitPrice*amount).toLocaleString() + "원";
       }
 
-      
+      function doDcPrice() {
+          let order_dcFee = document.getElementById("order_discountFee" + i);
+          let orderDcFee = parseInt(order_dcFee.textContent.replace(/,/g, ""));
+          order_dcFee.innerHTML = (50000*amount).toLocaleString() + "원";
+        }
     
       // 결제예상 함수
       function doOrderTotal() {
     	  let order_fee = document.getElementById("order_fee" + i);
-        let order_exAmount = document.getElementById("order_ex-amount" + i)
-        let order_deliveryFee = parseInt(document.getElementById("order_deliveryFee" + i).textContent.replace(/,/g, ""));
-        let order_discountFee = parseInt(document.getElementById("order_discountFee" + i).textContent.replace(/,/g, ""));
+        let order_exAmount = document.getElementById("order_ex-amount" + i);
+        let order_discountFee = document.getElementById("order_discountFee" + i);
+        let order_dcFee = parseInt(order_discountFee.textContent.replace(/,/g, ""));
         let orderFee = parseInt(order_fee.textContent.replace(/,/g, ""));
    
-        order_exAmount.innerHTML = ((unitPrice* amount) + order_deliveryFee - order_discountFee).toLocaleString() + "원";
+       
+        order_exAmount.innerHTML = ((unitPrice* amount)- (50000*amount)).toLocaleString() + "원";
       }
 
       doOrderTotal();
@@ -446,6 +471,7 @@ td {
       // total 박스 관련
       let total_checkedFee = document.getElementById("total_checkedFee");
 
+      // 체크했을때 이벤트
       checkbox.addEventListener("change", function () {
 
 
@@ -466,35 +492,47 @@ td {
 
       });
 
+
+	
+      
       // total박스 메소드
       function doTotal() {
         let total_checkedFee = document.getElementById("total_checkedFee");
         let total_deliveryFee = 0;
         let total_discountFee = 0; 
         let totalFee = 0; 
-
+		let totalAll = 0;
+		
+    	
         infoContainers.forEach((Container, idx) => {
-          let checkbox = document.getElementById("chkbox" +  (idx + 1));
+	
+        	 let checkbox = document.getElementById("chkbox" + (idx + 1));
+        	 let order_fee = document.getElementById("order_fee" + (idx + 1));
+       	     let order_discountFee = document.getElementById("order_discountFee" + (idx + 1));
 
           if (checkbox.checked) {
-            let order_fee = document.getElementById("order_fee" +  (idx + 1));
-            let order_deliveryFee = document.getElementById("order_deliveryFee" +  (idx + 1));
-            let order_discountFee = document.getElementById("order_discountFee" +  (idx + 1));
+        	  let orderFee = parseInt(order_fee.textContent.replace(/,/g, ""));
+              let discountFee = parseInt(order_discountFee.textContent.replace(/,/g, ""));
+              totalFee += orderFee;
+              total_discountFee += discountFee;
+            
+            if(totalFee <= 1000000){
+            	total_deliveryFee = 50000;
+            	
+            	} else {
+            		total_deliveryFee = 0;
+            	}
 
-            let orderFee = parseInt(order_fee.textContent.replace(/,/g, ""));
-            let deliveryFee = parseInt(order_deliveryFee.textContent.replace(/,/g, ""));
-            let discountFee = parseInt(order_discountFee.textContent.replace(/,/g, ""));
-
-            totalFee += orderFee;
-            total_deliveryFee += deliveryFee;
-            total_discountFee += discountFee;
+            
           }
         });
-     
+
         total_checkedFee.innerHTML = totalFee.toLocaleString() + " 원";
-        document.getElementById("total_deliveryFee").innerHTML = total_deliveryFee.toLocaleString() + " 원";
+        document.getElementById("total_deliveryFee").innerHTML = total_deliveryFee.toLocaleString() + "원";
         document.getElementById("total_discountFee").innerHTML = total_discountFee.toLocaleString() + " 원";
         document.getElementById("total_fee").innerHTML = (totalFee + total_deliveryFee - total_discountFee).toLocaleString() + " 원";
+      	totalAll = totalFee + total_deliveryFee - total_discountFee;
+
       }
 
       
@@ -502,7 +540,14 @@ td {
     });
 	
 	
+	
 
+	
+	
+	
+	
+	
+	
   </script>
 
 

@@ -1,506 +1,658 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ page import="index.beforePayDTO" %>
-<%@ page import="java.util.*" %>
+<%@ page import="index.beforePayDTO"%>
+<%@ page import="java.util.*"%>
 <%@ page import="java.text.NumberFormat"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <!-- font -->
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!-- bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+	crossorigin="anonymous"></script>
+<!-- font -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 </head>
 <style>
-  /* div { border: 1px solid orange; } */
+/* div { border: 1px solid orange; } */
 
-  /* common */
-  body { font-family: pretendard; }
-  ul, ol, dl, li { list-style: none; }
-  a { text-decoration: none; color: none; color: #000; }
-  /* common end */
-  a:hover, a:active, a:focus { text-decoration: none; }
+/* common */
+body {
+	font-family: pretendard;
+}
 
-  @font-face {
-    font-family: 'ImcreSoojin';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+ul, ol, dl, li {
+	list-style: none;
+}
 
-  .sectionbody { width: 65%; margin: 0 auto;}
-   /* =========================
+a {
+	text-decoration: none;
+	color: none;
+	color: #000;
+}
+/* common end */
+a:hover, a:active, a:focus {
+	text-decoration: none;
+}
+
+@font-face {
+	font-family: 'ImcreSoojin';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.sectionbody {
+	width: 65%;
+	margin: 0 auto;
+}
+/* =========================
   section header
-  ========================= */  
+  ========================= */
+.headerimg {
+	height: 50px;
+	display: inline-block;
+	width: 100%;
+	line-height: 3;
+}
 
-  .headerimg { height: 50px; display: inline-block; width: 100%; line-height: 3; }
-  .headerimg .img1, .img2, .img3 { width: 30px;}
-  .right  { float: right;}
-  .headerimg .img1 { margin-left: 10px;}
-  .headerimg .img2, .img3 { margin-right: 10px;}
+.headerimg .img1, .img2, .img3 {
+	width: 30px;
+}
 
-  .sectionheadertitle { display: flex; justify-content: center; height: 60px; align-items:center; color: #fff; background-color: #d8c69c;}
+.right {
+	float: right;
+}
 
-  /* ========================= 
+.headerimg .img1 {
+	margin-left: 10px;
+}
+
+.headerimg .img2, .img3 {
+	margin-right: 10px;
+}
+
+.sectionheadertitle {
+	display: flex;
+	justify-content: center;
+	height: 60px;
+	align-items: center;
+	color: #fff;
+	background-color: #d8c69c;
+}
+
+/* ========================= 
   accordion event
   ========================= */
-  
-  .accordion-button { font-size: 20px; font-weight: 500;}
-  .accordion-body { font-size: 15px;}
-  
-  .accordion-body tr { height: 70px;}
-  .accordion-body th { text-align: left; border: none;}
-  .accordion-body td { border: none; }
+.accordion-button {
+	font-size: 20px;
+	font-weight: 500;
+}
 
-  /* .receiver-address .input-group { width: 700px; } */
-  .accordion-body ul { margin: 0; padding: 0; }
-  .accordion-body li { margin-bottom: 15px; }
-  .accordion-body .postcode { width: 200px;}
-  .accordion-body .receiver-phonenumber .input-group { width: 500px; line-height: 2;}
-  
-  .mail1.form-control{ width: 0px;}
-  #mail2 { display: none;}
-  
-  #message-input { display: none;}
-  
+.accordion-body {
+	font-size: 15px;
+}
 
-  .deleverystyle { background-color: #f8f5ec; line-height: 4;}
-  .deleveryPrice { height: 60px; font-size: 16px; display: flex; justify-content: space-between; margin-left: 25px; margin-right: 50px; }
+.accordion-body tr {
+	height: 70px;
+}
 
-  .totalpricestyle { background-color: #f8f5ec; line-height: 4; }
-  .totalPrice { height: 80px; font-size: 20px; font-weight: 500; display: flex; justify-content: space-between; margin-left: 25px; margin-right: 50px; }
-  
-  .totalReserveMoneystyle { background-color: #f8f5ec; line-height: 4; }
-  .totalReserveMoney { height: 60px; font-size: 16px; font-weight: 500; display: flex; justify-content: space-between; margin-left: 25px; margin-right: 50px; }
+.accordion-body th {
+	text-align: left;
+	border: none;
+}
 
-  .paymentinfo .productprice, .deleveryfee, .pricecount { text-align: right; }
-  .productReserveMoney, .memberReserveMoney, .VoucherReserveMoney { text-align: right; }
+.accordion-body td {
+	border: none;
+}
 
-  .totalpricecheck { height: 70px; text-align: center; font-size: 20px; font-weight: 500; line-height: 4; background-color: #111; color: #fff;}
-  .paymentcheckcontent { height: 100px; color:grey; font-size: 12px; margin : 20px 20px 20px 20px;}
+/* .receiver-address .input-group { width: 700px; } */
+.accordion-body ul {
+	margin: 0;
+	padding: 0;
+}
+
+.accordion-body li {
+	margin-bottom: 15px;
+}
+
+.accordion-body .postcode {
+	width: 200px;
+}
+
+.accordion-body .receiver-phonenumber .input-group {
+	width: 500px;
+	line-height: 2;
+}
+
+.mail1.form-control {
+	width: 0px;
+}
+
+#mail2 {
+	display: none;
+}
+
+#message-input {
+	display: none;
+}
+
+.deleverystyle {
+	background-color: #f8f5ec;
+	line-height: 4;
+}
+
+.deleveryPrice {
+	height: 60px;
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 25px;
+	margin-right: 50px;
+}
+
+.totalpricestyle {
+	background-color: #f8f5ec;
+	line-height: 4;
+}
+
+.totalPrice {
+	height: 80px;
+	font-size: 20px;
+	font-weight: 500;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 25px;
+	margin-right: 50px;
+}
+
+.totalReserveMoneystyle {
+	background-color: #f8f5ec;
+	line-height: 4;
+}
+
+.totalReserveMoney {
+	height: 60px;
+	font-size: 16px;
+	font-weight: 500;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 25px;
+	margin-right: 50px;
+}
+
+.paymentinfo .productprice, .deleveryfee, .pricecount {
+	text-align: right;
+}
+
+.productReserveMoney, .memberReserveMoney, .VoucherReserveMoney {
+	text-align: right;
+}
+
+.totalpricecheck {
+	height: 70px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 4;
+	background-color: #111;
+	color: #fff;
+}
+
+.paymentcheckcontent {
+	height: 100px;
+	color: grey;
+	font-size: 12px;
+	margin: 20px 20px 20px 20px;
+}
 </style>
 
 <body class="main" style="margin-top: 0;">
 
 
-  <section id="section" class="sectionbody">
+	<section id="section" class="sectionbody">
 
-    <div class="sectionheader">
-      <div class="headerimg">
-        <a href="ProductDetails.jsp">
-          <img src="https://ifh.cc/g/jXsrR9.jpg" alt="" class="img1">
-        </a>
-        <div class="right">
-          <a href="mypage_main.jsp">
-            <img src="https://ifh.cc/g/DfnpvF.jpg" alt="" class="img2"></a>
-          <a href="shopping_basket.jsp">
-            <img src="https://ifh.cc/g/LHYQN7.jpg" alt="" class="img3">
-          </a>
-        </div>
-      </div>
-      <div class="sectionheadertitle">
-        <h4> 주문 / 결제 </h4>
-      </div>
-      <div class="infocontainer">
-        <!-- ========================= 
+		<div class="sectionheader">
+			<div class="headerimg">
+				<a href="ProductDetails.jsp"> <img
+					src="https://ifh.cc/g/jXsrR9.jpg" alt="" class="img1">
+				</a>
+				<div class="right">
+					<a href="mypage_main.jsp"> <img
+						src="https://ifh.cc/g/DfnpvF.jpg" alt="" class="img2"></a> <a
+						href="shopping_basket.jsp"> <img
+						src="https://ifh.cc/g/LHYQN7.jpg" alt="" class="img3">
+					</a>
+				</div>
+			</div>
+			<div class="sectionheadertitle">
+				<h4>주문 / 결제</h4>
+			</div>
+			<div class="infocontainer">
+				<!-- ========================= 
         accordion event
         ========================= -->
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+				<div class="accordion" id="accordionPanelsStayOpenExample">
 
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <!-- ========================= 
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<!-- ========================= 
               accordion event first
               ========================= -->
 
-              <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                aria-controls="panelsStayOpen-collapseOne">
-                배송지
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-              <div class="accordion-body">
+							<button class="accordion-button" type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#panelsStayOpen-collapseOne"
+								aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								배송지</button>
+						</h2>
+						<div id="panelsStayOpen-collapseOne"
+							class="accordion-collapse collapse show">
+							<div class="accordion-body">
 
-                <div class="form-check form-check-inline mt-3">
-                  <input type="radio" name="radio1" value="oldlocation" class="form-check-input cursor-pointer"
-                    id="compareinfo">
-                  <label for="compareinfo" class="form-check-label cursor-pointer">
-                    회원 정보와 동일
-                  </label>
-                </div>
+								<div class="form-check form-check-inline mt-3">
+									<input type="radio" name="radio1" value="oldlocation"
+										class="form-check-input cursor-pointer" id="compareinfo">
+									<label for="compareinfo"
+										class="form-check-label cursor-pointer"> 회원 정보와 동일 </label>
+								</div>
 
-                <div class="form-check form-check-inline">
-                  <input type="radio" name="radio1" value="newlocation" class="form-check-input cursor-pointer"
-                    id="newinfo">
-                  <label for="newinfo" class="form-check-label cursor-pointer">
-                    새로운 배송지
-                  </label>
-                </div>
-                <div class="locationinfo">
-                  <table class="table mt-5" class="receiverinfo">
-                    <tbody>
-                      <colgroup>
-                        <col style="width:100px;">
-                        <col style="width:auto;">
-                      </colgroup>
-                      <tr class="receiver-name">
-                        <th scope="row">받는 사람 <span style="color: red;">*</span>
-                        </th>
-                        <td class="inputcontent">
-                          <div class="input-group">
-                    
-                            <input type="text" class="form-control " id="rname" name="rname" placeholder="이름을 입력하세요"
-                              value="">
-                          </div>
-                        </td>
-                      </tr>
+								<div class="form-check form-check-inline">
+									<input type="radio" name="radio1" value="newlocation"
+										class="form-check-input cursor-pointer" id="newinfo">
+									<label for="newinfo" class="form-check-label cursor-pointer">
+										새로운 배송지 </label>
+								</div>
+								<div class="locationinfo">
+									<table class="table mt-5" class="receiverinfo">
+										<tbody>
+										<colgroup>
+											<col style="width: 100px;">
+											<col style="width: auto;">
+										</colgroup>
+										<tr class="receiver-name">
+											<th scope="row">받는 사람 <span style="color: red;">*</span>
+											</th>
+											<td class="inputcontent">
+												<div class="input-group">
 
-                      <tr class="receiver-address">
-                        <th scope="row"> 주소 <span style="color: red;">*</span>
-                        </th>
-                        <td>
-                          <div class="inputinfo">
-                            <ul class="zipcode-group">
-                              <li>
-                                <div class="input-group" style="width: 400px;">
-                                  <input type="text" id="postcode" placeholder="우편번호" class="postcode form-control" value="">
-                                  <input type="button" class="btn btn-secondary" onclick="execDaumPostcode()"
-                                    value="주소 검색">
-                              </li>
-                          </div>
-                          <li><input type="text" id="address" placeholder="주소" class="form-control" value=""></li>
-                          <li><input type="text" id="detailAddress" placeholder="상세주소" class="form-control" value=""></li>
-                          <li><input type="hidden" id="extraAddress" placeholder="참고항목" class="form-control"></li>
-                          </ul>
-                </div>
-                </td>
-                </tr>
+													<input type="text" class="form-control " id="rname"
+														name="rname" placeholder="이름을 입력하세요" value="">
+												</div>
+											</td>
+										</tr>
 
-                <tr class="receiver-phonenumber">
-                  <th scope="row"> 휴대전화 <span style="color: red;">*</span>
-                  </th>
-                  <td>
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control" id="rnumber1" placeholder="010" name="pnum1" value="">-
-                      <input type="text" class="form-control" id="rnumber2" name="pnum2" value="">-
-                      <input type="text" class="form-control" id="rnumber3" name="pnum3" value="">
-                      </div>
-                  </td>
-                </tr>
+										<tr class="receiver-address">
+											<th scope="row">주소 <span style="color: red;">*</span>
+											</th>
+											<td>
+												<div class="inputinfo">
+													<ul class="zipcode-group">
+														<li>
+															<div class="input-group" style="width: 400px;">
+																<input type="text" id="postcode" placeholder="우편번호"
+																	class="postcode form-control" value=""> <input
+																	type="button" class="btn btn-secondary"
+																	onclick="execDaumPostcode()" value="주소 검색">
+														</li>
+												</div>
+												<li><input type="text" id="address" placeholder="주소"
+													class="form-control" value=""></li>
+												<li><input type="text" id="detailAddress"
+													placeholder="상세주소" class="form-control" value=""></li>
+												<li><input type="hidden" id="extraAddress"
+													placeholder="참고항목" class="form-control"></li>
+												</ul>
+												</div>
+											</td>
+										</tr>
 
-                <tr class="receiver-emailaddress">
-                  <th scope="row"> 이메일
-                  </th>
-                  <td>
-                    <div class="input-group mb-3">
-                      <input type="text" id="mail1" name="mail1" class="mail1 form-control">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <select name="form-select" id="mail-list" class="form-select" style="border-radius: 5px;">
-                        <option selected>-이메일 선택-</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="nate.com">nate.com</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                        <option value="yahoo.com">yahoo.com</option>
-                        <option value="etc">직접입력</option>
-                        <input type="text" name="mail2" id="mail2" class="form-control" placeholder="직접입력">
-                      </select>
-                      </div>
-                  </td>
-                </tr>
-                </tbody>
-              </div>
-              </table>
+										<tr class="receiver-phonenumber">
+											<th scope="row">휴대전화 <span style="color: red;">*</span>
+											</th>
+											<td>
+												<div class="input-group mb-3">
+													<input type="text" class="form-control" id="rnumber1"
+														placeholder="010" name="pnum1" value="">- <input
+														type="text" class="form-control" id="rnumber2"
+														name="pnum2" value="">- <input type="text"
+														class="form-control" id="rnumber3" name="pnum3" value="">
+												</div>
+											</td>
+										</tr>
 
-              <div class="massageform">
-                <select name="form-select" id="message-list" class="form-select" style="border-radius: 5px;">
-                  <option value="message-0" selected>--메시지 선택 (선택사항)--</option>
-                  <option value="message-1">배송 전에 미리 연락바랍니다.</option>
-                  <option value="message-2">부재 시 경비실에 맡겨주세요. </option>
-                  <option value="message-3">부재 시 문 앞에 놓아주세요.</option>
-                  <option value="message-4">빠른 배송 부탁드립니다</option>
-                  <option value="message-etc">직접입력</option>
-                  <input type="text" name="message-list2" id="message-input" class="form-control" placeholder="직접입력">
-                </select>
-              </div>
+										<tr class="receiver-emailaddress">
+											<th scope="row">이메일</th>
+											<td>
+												<div class="input-group mb-3">
+													<input type="text" id="mail1" name="mail1"
+														class="mail1 form-control"> <span
+														class="input-group-text" id="basic-addon1">@</span> <select
+														name="form-select" id="mail-list" class="form-select"
+														style="border-radius: 5px;">
+														<option selected>-이메일 선택-</option>
+														<option value="gmail.com">gmail.com</option>
+														<option value="naver.com">naver.com</option>
+														<option value="daum.net">daum.net</option>
+														<option value="nate.com">nate.com</option>
+														<option value="hotmail.com">hotmail.com</option>
+														<option value="yahoo.com">yahoo.com</option>
+														<option value="etc">직접입력</option>
+														<input type="text" name="mail2" id="mail2"
+														class="form-control" placeholder="직접입력">
+													</select>
+												</div>
+											</td>
+										</tr>
+										</tbody>
+										</div>
+									</table>
 
-              <div class="form-check mt-4">
-                <input type="checkbox" class="form-check-input cursor-pointer" id="savelocation">
-                <label for="savelocation" class="form-check-label cursor-pointer">
-                  <!-- label for에 chekbox id를 가져오면 체크박스뿐만 아니라 문자열을 클릭해도 체크됨 -->
-                  기본 배송지로 저장
-                </label>
-             
-              </div>
-              
-            </div>    
-          </div>
-        </div>
-        <hr>
-        
-       	<%
+									<div class="massageform">
+										<select name="form-select" id="message-list"
+											class="form-select" style="border-radius: 5px;">
+											<option value="message-0" selected>--메시지 선택 (선택사항)--</option>
+											<option value="message-1">배송 전에 미리 연락바랍니다.</option>
+											<option value="message-2">부재 시 경비실에 맡겨주세요.</option>
+											<option value="message-3">부재 시 문 앞에 놓아주세요.</option>
+											<option value="message-4">빠른 배송 부탁드립니다</option>
+											<option value="message-etc">직접입력</option>
+											<input type="text" name="message-list2" id="message-input"
+											class="form-control" placeholder="직접입력">
+										</select>
+									</div>
+
+									<div class="form-check mt-4">
+										<input type="checkbox" class="form-check-input cursor-pointer"
+											id="savelocation"> <label for="savelocation"
+											class="form-check-label cursor-pointer"> <!-- label for에 chekbox id를 가져오면 체크박스뿐만 아니라 문자열을 클릭해도 체크됨 -->
+											기본 배송지로 저장
+										</label>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<hr>
+
+
+
+
+						<!-- ========================= 
+              accordion event second
+              ========================= -->
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseTwo"
+									aria-expanded="false"
+									aria-controls="panelsStayOpen-collapseTwo">주문상품</button>
+							</h2>
+							<div id="panelsStayOpen-collapseTwo"
+								class="accordion-collapse collapse show">
+								<div class="accordion-body">
+
+									<%
        	NumberFormat numberFormat = NumberFormat.getNumberInstance(java.util.Locale.US);
        	List<beforePayDTO> list = (List<beforePayDTO>) session.getAttribute("list3");
 		if(list == null) {
 			System.out.println("NUll");
 		} else {
 			System.out.println("NUll아님");
-			
-			
-			
-			
-			
-		}
+			for(beforePayDTO beforePay : list){
 		%>
-		
 
-        <!-- ========================= 
-              accordion event second
-              ========================= -->
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-              aria-controls="panelsStayOpen-collapseTwo">
-              주문상품
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
-            <div class="accordion-body">
+									<div class="locationinfo">
+										<table class="table" class="receiverinfo">
+											<tbody>
+											<colgroup>
+												<col style="width: 100px;">
+												<col style="width: auto;">
+											</colgroup>
+											<tr class="orderedProduct">
+												<th scope="row" rowspan="3"><a href="product.jsp">
+														<img src="<%=beforePay.getImageUrl() %>" width="180px"
+														height="150px" alt="" class="orderedImg">
+												</a></th>
+												<td class="inputcontent">
+													<div class="productname">
+														<%=beforePay.getProductName() %>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="inputcontent">
+													<div class="productquantity">
+														수량 <span class="quantity-item"><%=numberFormat.format(beforePay.getAmount() )%></span>개
+													</div>
+												</td>
+											<tr style="border: none;">
+												<td class="inputcontent">
+													<div class="productprice">
+														<span class="productprice-item"><%=numberFormat.format(beforePay.getProductPrice()) %></span>원
+													</div>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+									<%		
+			}%>
 
-              <div class="locationinfo">
-                <table class="table" class="receiverinfo">
-                  <tbody>
-                    <colgroup>
-                      <col style="width:100px;">
-                      <col style="width:auto;">
-                    </colgroup>
-                    <tr class="orderedProduct">
-                      <th scope="row" rowspan="3">
-                      	<a href="product.jsp">
-                      		
-                        <img src="<%=list.get(0).getImageUrl() %>" width="180px" height="150px" alt="" class="orderedImg">
-                    	
-                        </a>
-                      </th>
-                      <td class="inputcontent">
-                        <div class="productname">
-                          <%=list.get(0).getProductName() %>
-                        </div>
-                      </td>
-                    </tr>
-                    <td class="inputcontent">
-                      <div class="productquantity">
-                        수량 <span class="quantity-item"><%=numberFormat.format(list.get(0).getAmount() )%></span>개
-                      </div>
-                    </td>
-                    <tr style="border: none;">
-                      <td class="inputcontent">
-                        <div class="productprice">
-                          <span class="productprice-item"><%=numberFormat.format(list.get(0).getProductPrice()) %></span>원
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
 
-            <div class="deleverystyle">
-              <div class="deleveryPrice">
-                <div class="title"> 배송비 </div>
-                <div class="deleveryFee-item">
-                  <span class="delveryFee"><strong> <%=numberFormat.format(list.get(0).getDeleveryFee())%> </span> 원</strong>
-                </div>
-              </div>
-            </div>
+								</div>
+								<div class="deleverystyle">
+									<div class="deleveryPrice">
+										<div class="title">배송비</div>
+										<div class="deleveryFee-item">
+											<span class="delveryFee"><strong> <%=numberFormat.format(list.get(0).getDeleveryFee())%></span>
+											원</strong>
+										</div>
+									</div>
+								</div>
 
-          </div>
-        </div>
+							</div>
+						</div>
 
-          <!-- ========================= 
+						<!-- ========================= 
           accordion event third
           ========================= -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapseThree">
-                결제정보
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
-              <div class="accordion-body">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapseThree"
+									aria-expanded="false"
+									aria-controls="panelsStayOpen-collapseThree">결제정보</button>
+							</h2>
+							<div id="panelsStayOpen-collapseThree"
+								class="accordion-collapse collapse show">
+								<div class="accordion-body">
 
-                <div class="paymentinfo">
-                  <table class="table mt-3">
-                    <tbody>
-                      <tr>
-                        <td class="productname"> 주문상품 </td>
-                        <td class="productprice" style="padding-right: 30px;"><%=numberFormat.format( list.get(0).getProductPrice()) %>원 </td>
-                      </tr>
-                      <tr>
-                        <td class="deleverytitle"> 배송비 </td>
-                        <td class="deleveryfee" style="padding-right: 30px;"><%=numberFormat.format(list.get(0).getDeleveryFee())%>원 </td>
-                      </tr>
-                      <tr>
-                        <td class="pricecounttitle"> 할인/부가결제 </td>
-                        <td class="pricecount" style="padding-right: 30px;"> 0원 </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+									<div class="paymentinfo">
+										<table class="table mt-3">
+											<tbody>
+												<tr>
+													<td class="productname">주문상품</td>
+													<td class="productprice" style="padding-right: 30px;"><a
+														href="productDetails.jsp"><%=numberFormat.format( list.get(0).getProductPrice()) %>원</a>
+													</td>
+												</tr>
+												<tr>
+													<td class="deleverytitle">배송비</td>
+													<td class="deleveryfee" style="padding-right: 30px;"><%=numberFormat.format(list.get(0).getDeleveryFee())%>원
+													</td>
+												</tr>
+												<tr>
+													<td class="pricecounttitle">할인/부가결제</td>
+													<td class="pricecount" style="padding-right: 30px;">
+														50,000원</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 
-              <div class="totalpricestyle">
-                <div class="totalPrice">
-                  <div class="title"> 최종결제금액</div>
-                  <div class="totalFee-item">
-                    <span class="totalFee"><strong><%=numberFormat.format(list.get(0).getProductPrice() + list.get(0).getDeleveryFee())%> </span> 원</strong>
-                  </div>
-                </div>
-              </div>
+								<div class="totalpricestyle">
+									<div class="totalPrice">
+										<div class="title">최종결제금액</div>
+										<div class="totalFee-item">
+											<span class="totalFee"><strong><%=numberFormat.format(list.get(0).getProductPrice() )%></span>
+											원</strong>
+										</div>
+									</div>
+								</div>
 
-            </div>
-          </div>
-          
+							</div>
+						</div>
 
-          <!-- ========================= 
+
+						<!-- ========================= 
           accordion event fourth
           ========================= -->
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapsefour">
-                결제수단
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
-              <div class="accordion-body">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapsefour"
+									aria-expanded="false"
+									aria-controls="panelsStayOpen-collapsefour">결제수단</button>
+							</h2>
+							<div id="panelsStayOpen-collapsefour"
+								class="accordion-collapse collapse show">
+								<div class="accordion-body">
 
-                결제수단 선택
-                <div class="paymentchoice mt-5">
-                  <input type="radio" class="btn-check" name="options-base" id="option1" autocomplete="off" checked>
-                  <label class="btn" for="option1">카드결제</label>
+									결제수단 선택
+									<div class="paymentchoice mt-5">
+										<input type="radio" class="btn-check" name="options-base"
+											id="option1" autocomplete="off" checked> <label
+											class="btn" for="option1">카드결제</label> <input type="radio"
+											class="btn-check" name="options-base" id="option2"
+											autocomplete="off"> <label class="btn" for="option2">계좌이체</label>
 
-                  <input type="radio" class="btn-check" name="options-base" id="option2" autocomplete="off">
-                  <label class="btn" for="option2">계좌이체</label>
+										<input type="radio" class="btn-check" name="options-base"
+											id="option3" autocomplete="off"> <label class="btn"
+											for="option3">무통장입금</label> <input type="radio"
+											class="btn-check" name="options-base" id="option4"
+											autocomplete="off"> <label class="btn" for="option4">휴대폰
+											결제</label>
+									</div>
 
-                  <input type="radio" class="btn-check" name="options-base" id="option3" autocomplete="off">
-                  <label class="btn" for="option3">무통장입금</label>
+									<div class="form-check mt-5">
+										<input type="checkbox" class="form-check-input cursor-pointer"
+											id="paymentmethod"> <label for="paymentmethod"
+											class="form-check-label cursor-pointer"> 결제수단과 방법을
+											다음에도 사용 </label>
+									</div>
 
-                  <input type="radio" class="btn-check" name="options-base" id="option4" autocomplete="off">
-                  <label class="btn" for="option4">휴대폰 결제</label>
-                </div>
+								</div>
+							</div>
+						</div>
 
-                <div class="form-check mt-5">
-                  <input type="checkbox" class="form-check-input cursor-pointer" id="paymentmethod">
-
-                  <label for="paymentmethod" class="form-check-label cursor-pointer">
-                    결제수단과 방법을 다음에도 사용
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <!-- ========================= 
+						<!-- ========================= 
           accordion event fifth
           ========================= -->
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapsefive">
-                적립혜택
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse">
-              <div class="accordion-body">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#panelsStayOpen-collapsefive"
+									aria-expanded="false"
+									aria-controls="panelsStayOpen-collapsefive">적립혜택</button>
+							</h2>
+							<div id="panelsStayOpen-collapsefive"
+								class="accordion-collapse collapse">
+								<div class="accordion-body">
 
-                <div class="paymentinfo">
-                  <table class="table mt-3">
-                    <tbody>
-                      <tr>
-                        <td class="productReserveMoneyTitle"> 상품별 적립금 </td>
-                        <td class="productReserveMoney" style="padding-right: 30px;"> 0원 </td>
-                      </tr>
-                      <tr>
-                        <td class="memberReserveMoneyTitle"> 회원 적립금 </td>
-                        <td class="memberReserveMoney" style="padding-right: 30px;"> 0원 </td>
-                      </tr>
-                      <tr>
-                        <td class="VoucherReserveMoneyTitle"> 쿠폰적립금 </td>
-                        <td class="VoucherReserveMoney" style="padding-right: 30px;"> 0원 </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+									<div class="paymentinfo">
+										<table class="table mt-3">
+											<tbody>
+												<tr>
+													<td class="productReserveMoneyTitle">상품별 적립금</td>
+													<td class="productReserveMoney"
+														style="padding-right: 30px;">0원</td>
+												</tr>
+												<tr>
+													<td class="memberReserveMoneyTitle">회원 적립금</td>
+													<td class="memberReserveMoney" style="padding-right: 30px;">
+														0원</td>
+												</tr>
+												<tr>
+													<td class="VoucherReserveMoneyTitle">쿠폰적립금</td>
+													<td class="VoucherReserveMoney"
+														style="padding-right: 30px;">0원</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 
-              </div>
+								</div>
 
-              <div class="totalReserveMoneystyle">
-                <div class="totalReserveMoney">
-                  <div class="title"> 적립예정금액 </div>
-                  <div class="totalReserveMoney-item">
-                    <span class="totalReserveMoney"><strong> 0원 </span></strong>
-                  </div>
-                </div>
-              </div>
+								<div class="totalReserveMoneystyle">
+									<div class="totalReserveMoney">
+										<div class="title">적립예정금액</div>
+										<div class="totalReserveMoney-item">
+											<span class="totalReserveMoney"><strong> 0원 </span></strong>
+										</div>
+									</div>
+								</div>
 
 
-            </div>
-          </div>
-        
-        <!-- ========================= 
+							</div>
+						</div>
+
+						<!-- ========================= 
         accordion event end
         ========================= -->
-          
-          <div class="paymentcheck">
-            <a href="paymentComplete.jsp">
-            <div class="totalpricecheck">
-              <span class="totalprice"> 520,000</span>원 결제하기</div>
-            </a>
-            <div class="paymentcheckcontent">
-              - 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다. <br><br>
-              - 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
-            </div>
-          </div>
+
+						<div class="paymentcheck">
+							<a href="paymentComplete.jsp">
+								<div class="totalpricecheck">
+									<span class="totalprice"> 500,000</span>원 결제하기
+								</div>
+							</a>
+							 <%}
+		%>
+							<div class="paymentcheckcontent">
+								- 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해
+								무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기
+								바랍니다. <br>
+								<br> - 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.
+							</div>
+						</div>
 
 
 
-      </div>
+					</div>
+	</section>
 
-
-
-
-
-  </section>
-
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
   // 받는 사람 입력 요소
   let nameInput = document.querySelector("#rname");
   let postcodeInput = document.querySelector("#postcode");

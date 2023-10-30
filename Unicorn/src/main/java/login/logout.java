@@ -23,7 +23,7 @@ public class logout extends HttpServlet {
 		if(ses != null) {
 			ses.invalidate();
 		}
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/Unicorn/index.jsp");
 	
 	}
 

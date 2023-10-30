@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ page import="java.util.*"%>
+<%@ page import="productList.ProductInfoDTO"%>
+<%@ page import="index.tabs_reviewInfoDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,338 +27,137 @@
 <!-- font -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <style>
 /* div { border: 1px solid orange; } */
 
 /* common */
-body {
-	font-family: pretendard;
-}
-
-ul, ol, dl, li {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	color: none;
-	color: #000;
-}
-
+body { font-family: pretendard; }
+ul, ol, dl, li { list-style: none; }
+a { text-decoration: none; color: none; color: #000; }
 /* common end */
-a:hover, a:active, a:focus {
-	text-decoration: none;
-}
+a:hover, a:active, a:focus { text-decoration: none; }
 
 @font-face {
-	font-family: 'ImcreSoojin';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'ImcreSoojin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* =========================
   botton tabs
   ========================= */
-.sectionbody .nav-link {
-	width: 278px;
-	text-align: center;
-}
+.sectionbody .nav-link { width: 278px; text-align: center; }
 
-.returninfo {
-	list-style: disc;
-}
+.returninfo { list-style: disc; }
 
-.table.table td {
-	text-align: left;
-	font-size: 13px;
-}
+.table.table td { text-align: left; font-size: 13px; }
 
 /* =========================
   review tabs
   ========================= */
-.table.table td {
-	text-align: left;
-	font-size: 13px;
-}
+.table.table td { text-align: left;	font-size: 13px; }
 
-.reviewcontainer {
-	display: flex;
-}
+.reviewcontainer { display: flex; }
 
-.reviewbutton {
-	text-align: right;
-	justify-content: flex-end;
-	margin-right: 10px;
-	margin-bottom: 50px;
-}
+.reviewbutton { text-align: right; justify-content: flex-end; margin-right: 10px; margin-bottom: 50px; }
 
-.reviewcontainer .content-container {
-	display: flex;
-	flex-wrap: wrap;
-	width: 750px;
-	font-size: 13px;
-}
+.reviewcontainer .content-container { display: flex; flex-wrap: wrap; width: 750px; font-size: 13px; }
 
-.reviewcontainer .score {
-	width: 10%;
-	height: 30px;
-	padding-left: 5px;
-}
+.reviewcontainer .score { width: 10%; height: 30px; padding-left: 5px; }
 
-.reviewcontainer .scorevalue {
-	width: 90%;
-	height: 30px;
-	font-weight: 1000;
-	font-size: 14px;
-	padding-left: 5px;
-}
+.reviewcontainer .scorevalue { width: 90%; height: 30px; font-weight: 1000; font-size: 14px; padding-left: 5px; }
 
-.reviewcontainer .id, .date, .report {
-	height: 30px;
-	margin-right: 10px;
-}
+.reviewcontainer .id, .date, .report { height: 30px; margin-right: 10px; }
 
-.reviewcontainer .reviewcontent {
-	width: 100%;
-	height: 100px;
-	padding-left: 5px;
-	margin-top: 10px;
-}
+.reviewcontainer .reviewcontent { width: 100%; height: 100px; padding-left: 5px; margin-top: 10px; }
 
 .reviewcontainer .id, .date, .report, .product, .productname,
-	.productsize, .productcolor {
-	color: #a0a0a0;
-	padding-left: 5px;
-}
+	.productsize, .productcolor { color: #a0a0a0; padding-left: 5px; }
 
-.reviewcontainer .reviewcontent {
-	overflow: hidden;
-}
+.reviewcontainer .reviewcontent { overflow: hidden; }
 
-.reviewcontainer .reviewphoto {
-	display: none;
-}
+.reviewcontainer .reviewphoto { display: none; }
 
-.reviewcontainer .recommend {
-	width: 15%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+.reviewcontainer .recommend { width: 15%; text-align: center; display: flex; justify-content: center; align-items: center; }
 
-.recommend .btn {
-	border-radius: 10px;
-}
+.recommend .btn { border-radius: 10px; }
 
-.reviewcontainer .photo {
-	width: 150px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+.reviewcontainer .photo { width: 150px; text-align: center; display: flex; justify-content: center; align-items: center; }
 
 /* 툴팁 */
-.custom-tooltip {
-	border: 1px solid #d0ac88;
-	--bs-tooltip-bg: var(--bs-white);
-	--bs-tooltip-color: var(--bs-black);
-}
+.custom-tooltip { border: 1px solid #d0ac88; --bs-tooltip-bg: var(--bs-white); --bs-tooltip-color: var(--bs-black); }
 
 /* q&a board css */
-th {
-	height: 50px;
-	background-color: #d8c69c;
-	text-align: center;
-}
+th { height: 50px; background-color: #d8c69c; text-align: center; }
 
-td {
-	text-align: center;
-	border-bottom: 1px solid #d8c69c;
-	padding: 5px;
-	font-size: 13px;
-}
+td { text-align: center; border-bottom: 1px solid #d8c69c; padding: 5px; font-size: 13px; }
 
 /* 페이지 css*/
-.pageWrap {
-	width: 100%;
-	margin-top: 50px;
-	display: flex;
-	justify-content: center;
-}
+.pageWrap { width: 100%; margin-top: 50px; display: flex; justify-content: center; }
 
-.page_button {
-	border: 1px solid #a0a0a0;
-	width: 35px;
-	text-align: center;
-	margin-right: 5px;
-	margin-left: 5px;
-	padding: 3px 0 3px 0;
-}
+.page_button { border: 1px solid #a0a0a0; width: 35px; text-align: center; margin-right: 5px; margin-left: 5px; padding: 3px 0 3px 0; }
 
-.page_sidebutton {
-	width: 35px;
-	text-align: center;
-}
+.page_sidebutton { width: 35px; text-align: center; }
 
-.page_button:hover {
-	cursor: pointer;
-}
+.page_button:hover { cursor: pointer; }
 
-.page_sidebutton:hover {
-	cursor: pointer;
-}
+.page_sidebutton:hover { cursor: pointer; }
 
-.writeWrap {
-	margin-top: 10px;
-}
+.writeWrap { margin-top: 10px; }
 
-.write_QnA {
-	width: 100px;
-	background-color: #d0ac88;
-	padding: 5px;
-	text-align: center;
-	float: right;
-	color: white;
-}
+.write_QnA { width: 100px; background-color: #d0ac88; padding: 5px; text-align: center; float: right; color: white; }
 
 /* =========================
     제품 상세 이미지
   ========================= */
 /*이미지 가격 박스 */
-.Product-detail {
-	display: flex;
-}
+.Product-detail { display: flex; }
 
-.bigbox {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 10%;
-}
+.bigbox { display: flex; justify-content: center; margin-bottom: 10%; }
 
-.box2 {
-	margin-left: 10px;
-	margin-right: 10px;;
-	width: 40%;
-	padding-left: 50px;
-}
+.box2 { margin-left: 10px; margin-right: 10px;; width: 40%; padding-left: 50px; }
 
 /*이미지 */
-.big-img {
-	width: 600px;
-	height: 400px;
-}
+.big-img { width: 600px; height: 400px; }
 
-.small-img {
-	width: 600px;
-	display: flex;
-	justify-content: center;
-}
+.small-img { width: 600px; display: flex; justify-content: center; }
 
-.small1, .small2, .small3 {
-	width: 100px;
-	height: 80px;
-	margin: 2%;
-}
+.small1, .small2, .small3 { width: 100px; height: 80px; margin: 2%; }
 
-.imgg img {
-	width: 100%;
-	height: 100%;
-}
+.imgg img { width: 100%; height: 100%; }
 
-.slider-container {
-	width: 600px;
-	height: 400px;
-	overflow: hidden;
-	position: relative;
-}
+.slider-container { width: 600px; height: 400px; overflow: hidden; position: relative; }
 
-.slider {
-	width: 600px;
-	height: 400px;
-	display: flex;
-	transition: transform 0.4s ease-in-out;
-}
+.slider { width: 600px; height: 400px; display: flex; transition: transform 0.4s ease-in-out; }
 
-.slider img {
-	width: 100%;
-	height: 100%;
-}
+.slider img { width: 100%; height: 100%; }
 
-.slider-button-pr, .slider-button-ne {
-	position: absolute;
-	bottom: 10px;
-	background-color: #8d8b8b;
-	color: #fff;
-	padding: 5px 10px;
-	cursor: pointer;
-}
+.slider-button-pr, .slider-button-ne { position: absolute; bottom: 10px; background-color: #8d8b8b; color: #fff; padding: 5px 10px; cursor: pointer; }
 
-.slider-button-ne {
-	left: 55%;
-	transform: translateX(-55%);
-}
+.slider-button-ne { left: 55%; transform: translateX(-55%);}
 
-.slider-button-pr {
-	left: 45%;
-	transform: translateX(-45%);
-}
+.slider-button-pr { left: 45%; transform: translateX(-45%); }
 
 /* 작은 이미지 호버 효과*/
-.small-image:hover {
-	border: 3px solid #9b9b9b;
-	border-radius: 3px;
-}
+.small-image:hover { border: 3px solid #9b9b9b; border-radius: 3px; }
 
-.price {
-	font-family: Arial;
-	color: red;
-	font-weight: 1000;
-	font-size: 20px;
-}
+.price { font-family: Arial; color: red; font-weight: 1000; font-size: 20px; }
 
-.form-select {
-	width: 300px;
-}
+.form-select { width: 300px; }
 
-#quantity-select {
-	width: 300px;
-}
+#quantity-select { width: 300px;}
 
-.top-button, .bottom-button {
-	display: none;
-	position: fixed;
-	background-color: transparent;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	height: 50px;
-	width: 50px;
-	position: fixed;
-	right: 10px;
-	transform: translateY(-50%);
-	padding: 10px;
-	border-radius: 10px;
-	margin-right: 10px;
-}
+.quantity-selection button { font-weight: 500;}
 
-.top-button {
-	top: 83%;
-}
+.top-button, .bottom-button { display: none; position: fixed; background-color: transparent; color: white; border: none; border-radius: 5px; cursor: pointer; height: 50px; width: 50px; position: fixed; right: 10px; transform: translateY(-50%); padding: 10px; border-radius: 10px; margin-right: 10px; }
 
-.bottom-button {
-	top: 90%;
-}
+.top-button { top: 83%; }
 
-.top-button img, .bottom-button img {
-	width: 160%; /* 이미지가 버튼에 꽉 차게 표시 */
-}
+.bottom-button { top: 90%; }
+
+.top-button img, .bottom-button img { width: 160%; /* 이미지가 버튼에 꽉 차게 표시 */ }
 </style>
 </head>
 <%@ include file="indexheader.jsp" %>
@@ -414,6 +220,7 @@ td {
 					<div class="price mb-2">${info.productPrice}</div>
 					<input type = "hidden" name = "productPrice" value = "${info.productPrice}">
 					<input type="hidden" name="productNum" value="${info.productNum}">
+					
 					<div class="salePrice mb-5" style="font-size: 15px">할인 금액
 						${info.salePrice}원</div>
 						<input type = "hidden" name = "salePrice" value = "${info.salePrice}">
@@ -440,17 +247,17 @@ td {
 						<h5 style="text-align: right; margin-right: 20px;">
 							<br>총 결제금액 : <span id="total-price">
 								${info.productPrice} </span>
-							<div style="font-size: 15px;">100만원 이상부터 무료배송이 가능합니다.</div>
+							<div style="font-size: 13px; margin-top:10px; color:#939393">100만원 이상부터 무료배송이 가능합니다.</div>
 
 						</h5>
 						<br>
-						<button type="submit" class="btn btn-outline-success" value=1 name="type">장바구니에
+						<button type="submit" class="btn btn-outline-success" style="width: 130px; height:60px;" value=1 name="type">장바구니에
 							담기</button>
-						<button type="button" class="btn btn-outline-success">
+						<button type="submit" class="btn btn-outline-success"style="width: 130px; height:60px;" value=2 name="type">
 							관심상품에 담기</button>
-						<button type="button" class="btn btn-outline-success">구매</button>
+						<button type="submit" class="btn btn-outline-success"style="width: 150px; height:60px;" value=3 name="type">구매</button>
 					</div>
-					
+					</form>
 
 				</div>
 			</div>
@@ -519,8 +326,7 @@ td {
 							<td>${info.productcompany}</td>
 							<td>모델명</td>
 							<td>${info.productnumber}</td>
-				<input type = "hidden" name = "productnumber" value = "${info.productnumber}">
-						</form>		
+
 						</tr>
 						<tr>
 							<td>원산지</td>
@@ -544,215 +350,88 @@ td {
 					</table>
 
 				</div>
-				<!-- =========================
+		 <!-- =========================
           review tabs 
           ========================= -->
 				<div class="tab-pane container " id="menu1">
-					<div class="sectioncontainer">
-						<div class="titleArea">
-							<h3 class="title mt-3">Review</h3>
-							<hr>
+				
+		            <div class="sectioncontainer">
+		              <div class="titleArea">
+		                <h3 class="title mt-3"> Review </h3>
+		            <hr>
+		              </div>
+		              	<div class="reviewarea">
+			              <div class="reviewbutton">
+			                <button class="btn btn-outline-secondary"> 리뷰 쓰기 </button>
+			              </div>
+		
+					<%
+					List<tabs_reviewInfoDTO> reviewlist = (List<tabs_reviewInfoDTO>)session.getAttribute("reviewList");
+					if(reviewlist == null || reviewlist.isEmpty()) {
+					System.out.println("list is null");
+					%>
+					리뷰가 없습니다.
+					<% 
+					} else {
+						for(tabs_reviewInfoDTO reviewinfo : reviewlist) {
+				
+						%>
+						
+			              <!-- 리뷰 반복 -->
+			              <!-- 리뷰 1개 클래스로 구역 설정-->
+			              <div class="reviewcontainer mt-3">
+			                <div class="profile"> 
+			                  <img src="https://ifh.cc/g/9QpqRb.jpg" width="30px" style="opacity: 0.4;" alt="">
+			                </div>
+			                <div class="content-container">
+			                <div class="score"> <%=reviewinfo.getScore() %> </div>
+			                <div class="scorevalue"> <%=reviewinfo.getScoreValue() %> </div>
+			                  <div class="id"> <%=reviewinfo.getId() %></div>
+			                  <div class="date">
+			                   <c:set var="now" value="<%=new java.util.Date()%>"> </c:set>
+			                  	<fmt:formatDate value="${ now }" pattern="yy.MM.dd."></fmt:formatDate>
+			                   </div>
+			                  <div> | </div>
+			                  <div class="report" > 신고 </div>
+			
+			                  <div class="content-container">
+			                  <div class="productname"> 상품명 : </div>
+			                  <div class="product me-1"> <%=reviewinfo.getProductName() %> </div>
+			                  <div> / </div>
+			                  <div class="productsize me-1"> <%=reviewinfo.getProductSize() %> </div>
+			                  <div> / </div>
+			                  <div class="productcolor"> <%=reviewinfo.getProductColor() %> </div>
+			                  <div class="reviewcontent"><%=reviewinfo.getReviewcontent() %> 
+			                  
+			                  </div>
+			                </div>
+			                <div class="reviewphoto">photozone</div>
+			              </div>
+			                  
+			                <div class="photo"> 
+			                  <img src=<%=reviewinfo.getReviewphoto() %> width="100px" height="100px" alt="">
+			                </div>
+			                <div class="recommend">
+			                  <button type="button" class="btn btn-outline-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="리뷰가 도움이 되셨나요?">
+			                    <img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
+			                    <span class="likecount" style="color: #000;">0</span>
+			                  </button>
+			                </div>
+			              </div>
+			              <%	
+								}
+						}
+						%>
+						
 						</div>
-						<div class="reviewbutton">
-							<button class="btn btn-outline-secondary">리뷰 쓰기</button>
-						</div>
-
-
-						<!-- 리뷰 반복 -->
-						<!-- 리뷰 1개 클래스로 구역 설정-->
-						<div class="reviewcontainer mt-3">
-							<div class="profile">
-								<img src="https://ifh.cc/g/9QpqRb.jpg" width="30px"
-									style="opacity: 0.4;" alt="">
-							</div>
-							<div class="content-container">
-								<div class="score">★★★★★</div>
-								<div class="scorevalue">5</div>
-								<div class="id">jjun****</div>
-								<div class="date">23.10.19</div>
-								<div>|</div>
-								<div class="report">신고</div>
-
-								<div class="content-container">
-									<div class="productname">상품명 :</div>
-									<div class="product me-1">Lorem ipsum dolor sit amet
-										consectetur</div>
-									<div>/</div>
-									<div class="productsize me-1">SS</div>
-									<div>/</div>
-									<div class="productcolor">white</div>
-									<div class="reviewcontent">Lorem ipsum dolor sit amet
-										consectetur adipisicing elit. Aut inventore omnis id delectus
-										accusamus tempora minima voluptates nihil veniam, distinctio
-										impedit. Aut aspernatur atque, iure quos possimus mollitia
-										facilis sint esse saepe, corporis earum dignissimos quod
-										itaque deserunt dolorum nam aliquam praesentium aperiam harum
-										inventore nesciunt natus quia! Fugit, ipsa.</div>
-								</div>
-								<div class="reviewphoto">photozone</div>
-							</div>
-
-							<div class="photo">
-								<img src="https://ifh.cc/g/vBwM0x.png" width="100px"
-									height="100px" alt="">
-							</div>
-							<div class="recommend">
-								<button type="button" class="btn btn-outline-warning"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									data-bs-custom-class="custom-tooltip"
-									data-bs-title="리뷰가 도움이 되셨나요?">
-									<img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-								</button>
-							</div>
-						</div>
-						<!-- 리뷰 1개 끝 -->
-						<!-- 리뷰 1개 클래스로 구역 설정-->
-						<div class="reviewcontainer mt-3">
-							<div class="profile">
-								<img src="https://ifh.cc/g/9QpqRb.jpg" width="30px"
-									style="opacity: 0.4;" alt="">
-							</div>
-							<div class="content-container">
-								<div class="score">★★★★★</div>
-								<div class="scorevalue">5</div>
-								<div class="id">jjun****</div>
-								<div class="date">23.10.19</div>
-								<div>|</div>
-								<div class="report">신고</div>
-
-								<div class="content-container">
-									<div class="productname">상품명 :</div>
-									<div class="product me-1">Lorem ipsum dolor sit amet
-										consectetur</div>
-									<div>/</div>
-									<div class="productsize me-1">SS</div>
-									<div>/</div>
-									<div class="productcolor">white</div>
-									<div class="reviewcontent">Lorem ipsum dolor sit amet
-										consectetur adipisicing elit. Aut inventore omnis id delectus
-										accusamus tempora minima voluptates nihil veniam, distinctio
-										impedit. Aut aspernatur atque, iure quos possimus mollitia
-										facilis sint esse saepe, corporis earum dignissimos quod
-										itaque deserunt dolorum nam aliquam praesentium aperiam harum
-										inventore nesciunt natus quia! Fugit, ipsa.</div>
-								</div>
-								<div class="reviewphoto">photozone</div>
-							</div>
-
-							<div class="photo">
-								<img src="https://ifh.cc/g/vBwM0x.png" width="100px"
-									height="100px" alt="">
-							</div>
-							<div class="recommend">
-								<button type="button" class="btn btn-outline-warning"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									data-bs-custom-class="custom-tooltip"
-									data-bs-title="리뷰가 도움이 되셨나요?">
-									<img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-								</button>
-							</div>
-						</div>
-						<!-- 리뷰 1개 끝 -->
-						<!-- 리뷰 1개 클래스로 구역 설정-->
-						<div class="reviewcontainer mt-3">
-							<div class="profile">
-								<img src="https://ifh.cc/g/9QpqRb.jpg" width="30px"
-									style="opacity: 0.4;" alt="">
-							</div>
-							<div class="content-container">
-								<div class="score">★★★★★</div>
-								<div class="scorevalue">5</div>
-								<div class="id">jjun****</div>
-								<div class="date">23.10.19</div>
-								<div>|</div>
-								<div class="report">신고</div>
-
-								<div class="content-container">
-									<div class="productname">상품명 :</div>
-									<div class="product me-1">Lorem ipsum dolor sit amet
-										consectetur</div>
-									<div>/</div>
-									<div class="productsize me-1">SS</div>
-									<div>/</div>
-									<div class="productcolor">white</div>
-									<div class="reviewcontent">Lorem ipsum dolor sit amet
-										consectetur adipisicing elit. Aut inventore omnis id delectus
-										accusamus tempora minima voluptates nihil veniam, distinctio
-										impedit. Aut aspernatur atque, iure quos possimus mollitia
-										facilis sint esse saepe, corporis earum dignissimos quod
-										itaque deserunt dolorum nam aliquam praesentium aperiam harum
-										inventore nesciunt natus quia! Fugit, ipsa.</div>
-								</div>
-								<div class="reviewphoto">photozone</div>
-							</div>
-
-							<div class="photo">
-								<img src="https://ifh.cc/g/vBwM0x.png" width="100px"
-									height="100px" alt="">
-							</div>
-							<div class="recommend">
-								<button type="button" class="btn btn-outline-warning"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									data-bs-custom-class="custom-tooltip"
-									data-bs-title="리뷰가 도움이 되셨나요?">
-									<img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-								</button>
-							</div>
-						</div>
-						<!-- 리뷰 1개 끝 -->
-						<!-- 리뷰 1개 클래스로 구역 설정-->
-						<div class="reviewcontainer mt-3">
-							<div class="profile">
-								<img src="https://ifh.cc/g/9QpqRb.jpg" width="30px"
-									style="opacity: 0.4;" alt="">
-							</div>
-							<div class="content-container">
-								<div class="score">★★★★★</div>
-								<div class="scorevalue">5</div>
-								<div class="id">jjun****</div>
-								<div class="date">23.10.19</div>
-								<div>|</div>
-								<div class="report">신고</div>
-
-								<div class="content-container">
-									<div class="productname">상품명 :</div>
-									<div class="product me-1">Lorem ipsum dolor sit amet
-										consectetur</div>
-									<div>/</div>
-									<div class="productsize me-1">SS</div>
-									<div>/</div>
-									<div class="productcolor">white</div>
-									<div class="reviewcontent">Lorem ipsum dolor sit amet
-										consectetur adipisicing elit. Aut inventore omnis id delectus
-										accusamus tempora minima voluptates nihil veniam, distinctio
-										impedit. Aut aspernatur atque, iure quos possimus mollitia
-										facilis sint esse saepe, corporis earum dignissimos quod
-										itaque deserunt dolorum nam aliquam praesentium aperiam harum
-										inventore nesciunt natus quia! Fugit, ipsa.</div>
-								</div>
-								<div class="reviewphoto">photozone</div>
-							</div>
-
-							<div class="photo">
-								<img src="https://ifh.cc/g/vBwM0x.png" width="100px"
-									height="100px" alt="">
-							</div>
-							<div class="recommend">
-								<button type="button" class="btn btn-outline-warning"
-									data-bs-toggle="tooltip" data-bs-placement="top"
-									data-bs-custom-class="custom-tooltip"
-									data-bs-title="리뷰가 도움이 되셨나요?">
-									<img src="https://ifh.cc/g/zPXGj2.png" width="15px" alt="">
-								</button>
-							</div>
-						</div>
-						<!-- 리뷰 1개 끝 -->
 					</div>
 				</div>
-				<!-- =========================
+	              <!-- 리뷰 1개 끝 -->
+	              <!-- 리뷰 1개 클래스로 구역 설정-->
+	              
+          <!-- =========================
           review tabs 끝
           ========================= -->
-
 
 				<div class="tab-pane container " id="menu2">
 
@@ -944,8 +623,27 @@ td {
    var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
    // 리뷰 쓰기 이동
-   document.querySelector(".reviewbutton").addEventListener("click", function () {
-      window.location.href = "index_hf_tabs reviewwrite.html";
+  	console.log("${boughtProduct}");
+ 	let boughtProduct = "${boughtProduct}";
+ 	let getproductName = "${info.productName}";
+  	console.log("${info.productName}");
+ 	
+   document.querySelector(".reviewbutton .btn").addEventListener("click", function(){
+   	if( boughtProduct == getproductName) {
+   		$.ajax({
+   			url : "tabsreviewWrite.jsp",
+   			type : "get",
+   			success:function(data) {
+   				$(".reviewarea").html(data);
+  				},
+  				error:function() {
+  					console.log("error");
+  				}
+   		});
+   		
+   	} else {
+   	  alert("구매하신 상품만 리뷰를 작성 할 수 있습니다.");
+   	}
    });
 
    //위에 이미지 호버 스크립트 /
@@ -1043,5 +741,5 @@ td {
    }
 </script>
 </body>
-<c:import url="indexfooter.jsp"/>
+<c:import url="http://localhost:8080/Unicorn/indexfooter.jsp"/>
 </html>

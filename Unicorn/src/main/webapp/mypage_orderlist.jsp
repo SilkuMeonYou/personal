@@ -47,6 +47,8 @@
     .menubar_title { font-weight: bold; margin-top: 70px; margin-bottom: 10px; }
     .menubar_item { margin-bottom: 10px; }
     .menubar:hover { cursor: pointer; }
+    
+    .none_id { text-align: center; color : gray; font-size : 15px; padding : 20px; }  
     /*==================== 고정 사이드메뉴*/
 
     .tab-content{ margin-top: 50px; }
@@ -79,6 +81,12 @@
     <!-- header end -->
 
     <!-- section -->
+    	<%
+    	
+       if(session.getAttribute("id") == null){%>
+       	<div class="none_id">로그인 후 이용가능합니다<div>  
+       <%}else{	%>
+       
     <section id="section" class="sectionbody">
 
       <div class="headerarea"></div>
@@ -86,25 +94,25 @@
 
         <div class="mainbar2">
           <div class="menubar">
-            <ul>
-              <li class="menubar_title">나의 쇼핑정보</li>
-              <li class="menubar_item"><a href="#none"></a>주문내역 조회</li>
-              <li class="menubar_item"><a href="#none"></a>적립금 내역</li>
-              <li class="menubar_item"><a href="#none"></a>쿠폰 내역</li>
-            </ul>
-
-            <ul>
-              <li class="menubar_title">활동 정보</li>
-              <li class="menubar_item"><a href="#none"></a>나의 장바구니</li>
-              <li class="menubar_item"><a href="#none"></a>나의 위시리스트</li>
-              <li class="menubar_item"><a href="#none"></a>나의 게시글</li>
-            </ul>
-
-            <ul>
-              <li class="menubar_title">나의 정보</li>
-              <li class="menubar_item"><a href="#none"></a>회원정보 수정</li>
-              <li class="menubar_item"><a href="#none"></a>로그아웃</li>
-            </ul>
+		  <ul>
+			<li class="menubar_title">나의 쇼핑정보</li>
+			<li class="menubar_item"><a href="mypage_orderlist.jsp">주문내역 조회</a></li>
+			<li class="menubar_item"><a href="mypage_point.jsp">적립금 내역</a></li>
+			<li class="menubar_item"><a href="coupon">쿠폰 내역</a></li>
+		  </ul>
+	
+		  <ul>
+			<li class="menubar_title">활동 정보</li>
+			<li class="menubar_item"><a href="shopping_basket.jsp">나의 장바구니</a></li>
+			<li class="menubar_item"><a href="wishlistServlet">나의 위시리스트</a></li>
+			<li class="menubar_item"><a href="board">나의 게시글</a></li>
+		  </ul>
+	
+		  <ul>
+			<li class="menubar_title">나의 정보</li>
+			<li class="menubar_item"><a href="signupSave">회원정보 수정</a></li>
+			<li class="menubar_item"><a href="logout.jsp">로그아웃</a></li>
+		  </ul>
 
           </div>
 
@@ -125,6 +133,7 @@
               <div class="tab-pane container active" id="home">
 
                 <div class="orderlist">
+
                   <table>
                     <colgroup>
                     <col width="300px">
@@ -253,7 +262,7 @@
         </div>
       </div>
 
-
+	<%}%>
     </section>
     <!-- section end -->
 

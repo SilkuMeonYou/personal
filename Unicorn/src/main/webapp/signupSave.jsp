@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,92 +28,20 @@
 /* div { border: 1px solid orange; } */
 
 /* common */
-body {
-	font-family: pretendard;
-}
-
-ul, ol, dl, li {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	color: none;
-	color: #000;
-}
+body { font-family: pretendard; }
+ul, ol, dl, li { list-style: none; }
+a { text-decoration: none; color: none; color: #000; }
 /* common end */
-a:hover, a:active, a:focus {
-	text-decoration: none;
-}
+a:hover, a:active, a:focus { text-decoration: none; }
 
 @font-face {
 	font-family: 'ImcreSoojin';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
-		format('woff');
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
 
-/* =========================
-	  헤더
-    ========================= */
-#header {
-	background: #fff;
-}
 
-header .toparea {
-	height: 50px;
-}
-
-header .topbar {
-	vertical-align: middle;
-}
-
-header .top-item {
-	float: right;
-	margin-right: 20px;
-	margin-top: 10px;
-	font-size: 12px;
-}
-
-header .container-fluid {
-	height: 100px;
-}
-
-/* =========================
-	  푸터
-    ========================= */
-footer .toparea {
-	height: 50px;
-}
-
-footer .topbar {
-	vertical-align: middle;
-}
-
-footer .top-item {
-	float: right;
-	margin-right: 20px;
-	margin-top: 0px;
-	font-size: 12px;
-}
-
-footer .logo {
-	padding-left: 15px;
-}
-
-.footer .container {
-	font-size: 11px;
-	font-weight: 1000;
-	line-height: 4;
-}
-
-.footercontent {
-	color: rgb(59, 59, 59);
-	font-weight: 300;
-	margin-right: 30px;
-}
 
 /* 고정 사이드메뉴 ====================*/
 #container {
@@ -203,23 +134,23 @@ footer .logo {
 					<div class="menubar">
 						<ul>
 							<li class="menubar_title">나의 쇼핑정보</li>
-							<li class="menubar_item"><a href="#none"></a>주문내역 조회</li>
-							<li class="menubar_item"><a href="#none"></a>적립금 내역</li>
-							<li class="menubar_item"><a href="#none"></a>쿠폰 내역</li>
-						</ul>
-
-						<ul>
+							<li class="menubar_item"><a href="mypage_orderlist.jsp">주문내역 조회</a></li>
+							<li class="menubar_item"><a href="mypage_point.jsp">적립금 내역</a></li>
+							<li class="menubar_item"><a href="coupon">쿠폰 내역</a></li>
+						  </ul>
+			  
+						  <ul>
 							<li class="menubar_title">활동 정보</li>
-							<li class="menubar_item"><a href="#none"></a>나의 장바구니</li>
-							<li class="menubar_item"><a href="#none"></a>나의 위시리스트</li>
-							<li class="menubar_item"><a href="#none"></a>나의 게시글</li>
-						</ul>
-
-						<ul>
+							<li class="menubar_item"><a href="shopping_basket.jsp">나의 장바구니</a></li>
+							<li class="menubar_item"><a href="wishlistServlet">나의 위시리스트</a></li>
+							<li class="menubar_item"><a href="board">나의 게시글</a></li>
+						  </ul>
+			  
+						  <ul>
 							<li class="menubar_title">나의 정보</li>
-							<li class="menubar_item"><a href="#none"></a>회원정보 수정</li>
-							<li class="menubar_item"><a href="#none"></a>로그아웃</li>
-						</ul>
+							<li class="menubar_item"><a href="signupSave">회원정보 수정</a></li>
+							<li class="menubar_item"><a href="logout.jsp">로그아웃</a></li>
+						  </ul>
 
 					</div>
 
@@ -245,17 +176,17 @@ footer .logo {
 									<tr>
 										<td class="profile_table_title">비밀번호 변경</td>
 										<td><input class="profile_table_item" type="password"
-											name="pw"></td>
+											name="pw" id="pw"></td>
 									</tr>
 									<tr>
 										<td class="profile_table_title">핸드폰 번호</td>
 										<td><input class="profile_table_item" type="text"
-											name="phone" value="${phoneNumber}"></td>
+											name="phoneNumber" id="phoneNumber" value="${phoneNumber}"></td>
 									</tr>
 									<tr>
 										<td class="profile_table_title">이메일</td>
 										<td><input class="profile_table_item" type="text"
-											name="email" value="${email}"></td>
+											name="email" id="email" value="${email}"></td>
 									</tr>
 									<tr>
 										<td class="profile_table_title">주소</td>
@@ -287,21 +218,20 @@ footer .logo {
 <script>
 let savebtn = document.querySelector(".savebtn"); //저장 버튼
 let pw = document.querySelector("#pw");
-let pw2 = document.querySelector("#pw2");
-let phone = document.querySelector("#phone");
+let phoneNumber = document.querySelector("#phoneNumber");
 let email = document.querySelector("#email");
 
 let address = document.querySelector("#address");
 
 
 function modifyInfo() {
-	if(address.value === "") {
-		alert("올바른 주소를 입력해주세요");
+	if(address.value === "" || email.value === "" || phoneNumber.value === "") {
+		alert("올바른 정보를 입력해주세요");
 	} else {
 		$.ajax({
 			type:"get",
 			url: "/Unicorn/modifyInfo",
-			data: { address: address.value },
+			data: { address: address.value, email: email.value, phoneNumber: phoneNumber.value },
 			
 			success: function(response) {
 				alert("정보가 수정되었습니다.");

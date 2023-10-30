@@ -23,8 +23,8 @@ public class login extends HttpServlet {
 		// 로그인 페이지를 불러옴
 //		HttpSession session = request.getSession();
 		System.out.println("login check");
-//		request.getRequestDispatcher("loginservlet").forward(request, response);
-		response.sendRedirect("login.jsp");
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+//		response.sendRedirect("login.jsp");
 	}
 
 	

@@ -73,7 +73,7 @@
   
 <script>
     document.querySelector("#supportbutton1").addEventListener("click", function(){
-      window.location.href = "notice.jsp"
+      window.location.href = "noticeServlet"
     });
     document.querySelector("#supportbutton2").addEventListener("click", function(){
       window.location.href = "QnA.jsp"

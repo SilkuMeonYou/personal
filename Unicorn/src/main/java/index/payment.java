@@ -52,6 +52,15 @@ public class payment extends HttpServlet {
 		beforepay.setAmount(1);
 		list.add(beforepay);
 		
+		beforepay = new beforePayDTO();
+		beforepay.setImageUrl("https://p.turbosquid.com/ts-thumb/Vb/LGD4wh/Vx/1/jpg/1694927627/1920x1080/fit_q87/a7ab9227a758bb7a720a77a0e15589554883d30d/1.jpg");
+		beforepay.setProductName("프리미엄 가죽 베드");
+		beforepay.setProductPrice(900000);
+		beforepay.setDeleveryFee(5000);
+		beforepay.setSalePrice(50000);
+		beforepay.setAmount(1);
+		list.add(beforepay);
+		
 		session.setAttribute("list3", list);
 		System.out.println("List added to session: " + list);
 		

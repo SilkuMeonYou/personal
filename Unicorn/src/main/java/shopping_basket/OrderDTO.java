@@ -1,23 +1,41 @@
 package shopping_basket;
 
 public class OrderDTO {
-	private String checkedProductIndex;
-	private String checkedAmount;
+	private String checkedImageUrl;
+	private String checkedName;
+	private int checkedDiscountPrice;
+	private int checkedProductPrice;
+
 	private String checkedSize;
-	private String checkedDelPrice;
-	private String checkedPrice;
-	private String totalPrice;
-	public String getCheckedProductIndex() {
-		return checkedProductIndex;
+	private int checkedAmount;
+	
+	private int totalCheckedPrice;
+	private int totalPrice;
+	private int totalDeliveryPrice;
+	
+	public String getCheckedImageUrl() {
+		return checkedImageUrl;
 	}
-	public void setCheckedProductIndex(String checkedProductIndex) {
-		this.checkedProductIndex = checkedProductIndex;
+	public void setCheckedImageUrl(String checkedImageUrl) {
+		this.checkedImageUrl = checkedImageUrl;
 	}
-	public String getCheckedAmount() {
-		return checkedAmount;
+	public String getCheckedName() {
+		return checkedName;
 	}
-	public void setCheckedAmount(String checkedAmount) {
-		this.checkedAmount = checkedAmount;
+	public void setCheckedName(String checkedName) {
+		this.checkedName = checkedName;
+	}
+	public int getCheckedDiscountPrice() {
+		return checkedDiscountPrice;
+	}
+	public void setCheckedDiscountPrice(int checkedDiscountPrice) {
+		this.checkedDiscountPrice = checkedDiscountPrice;
+	}
+	public int getCheckedProductPrice() {
+		return checkedProductPrice;
+	}
+	public void setCheckedProductPrice(int checkedProductPrice) {
+		this.checkedProductPrice = checkedProductPrice;
 	}
 	public String getCheckedSize() {
 		return checkedSize;
@@ -25,22 +43,31 @@ public class OrderDTO {
 	public void setCheckedSize(String checkedSize) {
 		this.checkedSize = checkedSize;
 	}
-	public String getCheckedDelPrice() {
-		return checkedDelPrice;
+	public int getCheckedAmount() {
+		return checkedAmount;
 	}
-	public void setCheckedDelPrice(String checkedDelPrice) {
-		this.checkedDelPrice = checkedDelPrice;
+	public void setCheckedAmount(int checkedAmount) {
+		this.checkedAmount = checkedAmount;
 	}
-	public String getCheckedPrice() {
-		return checkedPrice;
+	public int getTotalCheckedPrice() {
+		return totalCheckedPrice;
 	}
-	public void setCheckedPrice(String checedPrice) {
-		this.checkedPrice = checedPrice;
+	public void setTotalCheckedPrice(int totalCheckedPrice) {
+		this.totalCheckedPrice = totalCheckedPrice;
 	}
-	public String getTotalPrice() {
+	public int getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public int getTotalDeliveryPrice() {
+		return totalDeliveryPrice;
+	}
+	public void setTotalDeliveryPrice(int totalDeliveryPrice) {
+		this.totalDeliveryPrice = totalDeliveryPrice;
+	}
+	
+	
+	
 }

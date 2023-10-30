@@ -21,10 +21,12 @@ public class shopping_basketServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
+		
 		String num = request.getParameter("productNum");
+		
 		String productSize = request.getParameter("productSize");
 		String amount = request.getParameter("amount");
-		response.setContentType("text/html; charset=UTF-8");
+	
 		
 		List<CartDTO> list = (List<CartDTO>) session.getAttribute("cartList");
 		if (list == null || list.isEmpty()) {
@@ -35,14 +37,31 @@ public class shopping_basketServlet extends HttpServlet {
 		cart.setNum(Integer.parseInt(num));
 		cart.setSize(productSize);
 		cart.setAmount(Integer.parseInt(amount));
+		System.out.println(cart.getAmount());
+		
 		list.add(cart);
 
 		session.setAttribute("cartList", list);
-		out.print("<script> if(confirm('상품이 등록되었습니다. 장바구니로 이동하시겠습니까?')){"
-				+ "window.location='shopping_basket.jsp';}"
-				+ "else { history.go(-1);};</script>");
 		
 		
-	}
+		 String typenumber = request.getParameter("type");
+	      System.out.println(typenumber);
+
+		 if("1".equals(typenumber)) {
+	         out.print("<script> if(confirm('상품이 등록되었습니다. 장바구니로 이동하시겠습니까?')){"
+		+ "window.location='shopping_basket.jsp';}"
+		+ "else { history.go(-1);};</script>");
+	   }else if("2".equals(typenumber)){
+	         out.print("<script>alert('위시리스트에 추가되었습니다.'); history.go(-1);</script>");
+	         
+	      }else if("3".equals(typenumber)){
+	         
+	         response.sendRedirect("payment");
+	   } else {
+		   System.out.println("오류");
+	   }
+
+
+	} 
 
 }
