@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="id_payment">
+
+	<select id="paymentTable" resultType="paymentDTO" parameterType="int">
+	
+		SELECT * FROM product p , users u, cart c WHERE u.userno=1 AND p.productno=1 AND c.userno=u.userno and c.cartno='c15' 
+	
+	</select>
+
+</mapper>

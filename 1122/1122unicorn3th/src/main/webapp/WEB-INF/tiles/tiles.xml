@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/WEB-INF/views/layout/layout.jsp">
+
+		<put-attribute name="title" value="TITLE" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/indexheader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/indexfooter.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="aside" value="" />
+	
+	</definition>
+	
+	<definition name="onlybody" template="/WEB-INF/views/layout/layout2.jsp">
+	
+		<put-attribute name="body" value="" />
+		
+	</definition>	
+	
+	<definition name="plusaside" template="/WEB-INF/views/layout/layout3.jsp">
+
+		<put-attribute name="title" value="TITLE" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/indexheader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/indexfooter.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="aside" value="" />
+	
+	</definition>
+	
+	
+	<definition name="login" extends="onlybody">
+    	<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+	</definition>
+
+	<definition name="idpw" extends="onlybody">
+		<put-attribute name="body" value="/WEB-INF/views/idpw.jsp" />
+	</definition>		
+	
+	<definition name="checked" extends="onlybody">
+		<put-attribute name="body" value="/WEB-INF/views/checked.jsp" />
+	</definition>			
+
+	<definition name="signup" extends="onlybody">
+		<put-attribute name="title" value="signup | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
+	</definition>
+
+	<definition name="logout" extends="onlybody">
+		<put-attribute name="title" value="signup | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/logout.jsp" />
+	</definition>	
+	
+	
+	
+	<definition name="payment" extends="onlybody">
+		<put-attribute name="title" value="abouttus | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/payment.jsp" />
+	</definition>	
+
+
+
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="main | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/indexbody.jsp" />
+	</definition>
+	
+	<definition name="aboutus" extends="baseLayout">
+		<put-attribute name="title" value="abouttus | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/aboutUs.jsp" />
+	</definition>
+	
+	<definition name="cart" extends="baseLayout">
+		<put-attribute name="title" value="cart | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/cart.jsp" />
+	</definition>
+	
+	<definition name="event_details" extends="baseLayout">
+		<put-attribute name="title" value="event_details | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/event_details.jsp" />
+	</definition>
+	
+	<definition name="event" extends="baseLayout">
+		<put-attribute name="title" value="event | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/event.jsp" />
+	</definition>
+	
+	<definition name="support" extends="baseLayout">
+		<put-attribute name="title" value="event | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/supportCustomer.jsp" />
+	</definition>
+	
+	<definition name="FAQ" extends="baseLayout">
+		<put-attribute name="title" value="event | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/FAQ.jsp" />
+	</definition>
+	
+	<definition name="notice" extends="baseLayout">
+		<put-attribute name="title" value="event | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/notice.jsp" />
+	</definition>
+	
+	<definition name="notice_details" extends="baseLayout">
+		<put-attribute name="title" value="event | unicorn" />
+		<put-attribute name="body" value="/WEB-INF/views/notice_details.jsp" />
+	</definition>
+
+	
+
+
+   
+</tiles-definitions>
