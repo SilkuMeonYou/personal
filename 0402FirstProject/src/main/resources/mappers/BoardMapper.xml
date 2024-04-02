@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<select id="getTime" resultType="String">
+		SELECT sysdate FROM dual
+	</select>
+	
+  <select id="getBoardList" parameterType="hashmap" resultType="com.human.java.BoardVO" >
+     SELECT rn, seq, title, writer, content, regdate, cnt
+      FROM (
+          SELECT rownum as rn, seq, title, writer, content, regdate, cnt
+            FROM (
+                 SELECT seq, title, writer, content, regdate, cnt
+                   FROM board
+                  <where>
+                     <if test="searchKeyword != null">
+                     ${searchCondition} like '%${searchKeyword}%'  
+                    </if>
+                  </where>
+                  ORDER BY seq desc     
+               )
+           )
+      WHERE rn BETWEEN ${firstRow} and ${EndRow}
+  </select>
+	
+	<select id="getBoard" parameterType="com.human.java.BoardVO" resultType="com.human.java.BoardVO">
+		SELECT * FROM board
+		WHERE seq = #{seq}
+	</select>
+	
+	
+	<insert id="saveBoard" parameterType="com.human.java.BoardVO">
+		INSERT INTO board(seq, title, writer, content, regdate, cnt
+			<if test="fileName != null">
+				, filename, filesize
+			</if>
+		)
+		VALUES ( board_seq.nextval, #{title}, #{writer}, #{content}, sysdate,  0 
+			<if test="fileName != null">
+				, #{fileName}, #{fileSize}
+			</if>
+		)
+	
+	</insert>
+	
+	
+	<update id="updateBoard" parameterType="com.human.java.BoardVO">
+		UPDATE board
+		SET content = #{content}, title = #{title} 
+		WHERE seq = #{seq}
+	</update>
+	
+	
+	<delete id="deleteBoard" parameterType="com.human.java.BoardVO">
+		DELETE FROM board
+		WHERE seq = #{seq}
+	</delete>
+	
+	
+	
+	<select id="getBoardCount" resultType="int">
+		SELECT count(*) FROM board
+	</select>
+	
+
+	
+	
+</mapper>
